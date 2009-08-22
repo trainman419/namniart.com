@@ -1,0 +1,146 @@
+body { 
+  padding: 0 5px 25px;
+  background-color: #9bb8b8;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333;
+}
+
+a {
+	color: gray;	
+}
+
+h2 {
+	color: #404040;
+	font-family: Helvetica,"Helvetica Neue",Arial,Geneva,sans-serif;
+	font-size: 24px;
+}
+
+h2.title {
+	margin-bottom: 10px;
+}
+
+h2.title a {
+	display: block;
+	color: #404040;	
+	text-decoration: none;
+}
+
+h2.title a:hover {
+	color: #666;	
+}
+
+.read-more {
+	font-size: 12px;
+}
+
+#content-wrapper {
+  width: 710px;
+  margin: 0 auto;
+  background: transparent url(images/content-wrapper-bg.gif) 0 0 repeat-y;
+}
+
+.highlight {
+	display: block;
+	overflow: auto;
+	padding-left: 15px;
+}
+
+h1#page-title {
+  height: 85px;
+	background-color: #9bb8b8;
+  margin: 0;
+	position: relative;
+}
+
+h1#page-title a {
+  text-indent: -5000em;
+	background: #9bb8b8 url(images/logo.gif) 0 0 no-repeat;
+	display: block;
+	width: 387px;
+	height: 56px;
+	position: absolute;
+	top: 28px;
+	left: 16px;
+}
+
+h1#page-title a:focus {
+	outline: none;
+}
+
+body#post h1#page-title {
+  height: 91px;
+}
+
+p#intro{
+  height: 130px;
+  padding: 49px 35px 0 164px;
+  margin: 0;
+  background: transparent url(images/intro-bg.gif) 0 0 no-repeat;
+}
+
+#content {
+  width: 448px;
+  padding-left: 18px;
+  float:left;
+}
+
+body#post #content {
+	float: none;
+	width:  673px;
+  padding: 18px 18px 0;
+  background: transparent url(images/content-bg.gif) 0 0 no-repeat;
+}
+
+#twitter_div {
+	font-size: 75%;
+}
+
+ul#twitter_update_list {
+	list-style: none;
+	font-size: 14px;
+	padding-left: 0px;
+}
+
+ul#twitter_update_list li {
+	font-style: italic;
+	margin-bottom: 10px;
+	padding-left: 8px;
+	border-left: 2px solid #ddd;
+}
+
+ul#twitter_update_list li > a {
+	display: block;
+	text-decoration: none;
+	font-style: normal;
+}
+
+
+#sidebar {
+  width: 200px;
+  padding-right: 18px;
+  float:right;
+}
+
+#footer {
+  clear: both;
+  background: transparent url(images/footer-bg.gif) left bottom no-repeat;
+  text-align: left;
+	padding: 18px 18px;
+	font-size: 12px;
+}
+
+ul.posts {
+	list-style-type:none;
+	padding-left: 5px;
+	margin-left:0px;
+}
+
+ul.posts li > p {
+	padding-left: 10px;
+	margin-top: 0px;
+}
+
+ul.posts li > h3 {
+	
+	padding-left: 5px; 
+}

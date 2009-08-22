@@ -1,0 +1,42 @@
+body { 
+  padding: 0 5px 25px;
+  background-color: #9bb8b8;
+}
+#content-wrapper {
+  width: 710px;
+  margin: 0 auto;
+  background: transparent url(images/content-wrapper-bg.gif) 0 0 repeat-y;
+}
+
+h1#page-title {
+  height: 85px;
+  margin: 0;
+  background: #9bb8b8 url(images/logo.gif) 16px 28px no-repeat;
+  text-indent: -5000em;
+}
+
+p#intro{
+  height: 130px;
+  padding: 49px 35px 0 164px;
+  margin: 0;
+  background: transparent url(images/intro-bg.gif) 0 0 no-repeat;
+}
+
+#content {
+  width: 448px;
+  padding-left: 18px;
+  float:left;
+}
+
+#sidebar {
+  width: 200px;
+  padding-right: 18px;
+  float:right;
+}
+
+#footer {
+  clear: both;
+  padding-bottom: 18px;
+  background: transparent url(images/footer-bg.gif) left bottom no-repeat;
+  text-align: center;
+}
