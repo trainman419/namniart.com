@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+  <title>Lake Denman - A Fix for Postfix</title>
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+  <!-- Homepage CSS -->
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+</head>
+
+<body id="post">
+  <div id='content-wrapper'>
+    <h1 id='page-title'>
+      <a href="/">
+        Lake Denman
+      </a>
+    </h1>
+
+    <div id='content'>
+      <h2>A Fix for Postfix</h2>
+      <p>As I rails developer, I have had some trouble in the past while sending mail from my server to an email address that has the same domain.</p>
+
+<p>If you are suffering from this problem, try checking to make sure that your hostname is not listed in postfix&#8217;s main.cf file.</p>
+<div>
+  <pre>
+    <code class='bash'>$ cat /etc/postfix/main.cf</code>
+  </pre>
+</div>
+<p>Will ouput something similar to:</p>
+<div>
+  <pre>
+    <code class='text'>...
+
+  myhostname = cache
+  alias_maps = hash:/etc/aliases
+  alias_database = hash:/etc/aliases
+  myorigin = /etc/mailname
+  mydestination =  myawesomesite.com, localhost.localdomain, localhost
+  relayhost = 
+  mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+  mailbox_size_limit = 0
+  recipient_delimiter = +
+  inet_interfaces = all</code>
+  </pre>
+</div>
+<p>You see how &#8216;myawesomesite.com&#8217; is listed in &#8220;mydestination&#8221;? Well, that&#8217;s the problem. Since I&#8217;m only sending mail and not receiving it, I need to get rid of the domain in &#8220;mydestination&#8221;. Otherwise postfix believes that the destination is local. The destination is going to a Google Apps address with the same domain name. I really hope this helps someone out.</p>
+
+<p>Further Reading:</p>
+
+<p><a href='http://forum.slicehost.com/comments.php?DiscussionID=1903'>Topic which pointed me in the right direction</a></p>
+
+<p><a href='http://www.postfix.org/postconf.5.html#mydestination'>What is mydestination?</a></p>
+      <a href="/">&laquo; Home</a>
+    </div>
+
+    <div id= 'footer'>
+      <a href="mailto:lake@lakedenman.com">Email</a> | 
+      <a href="skype:call?name=lakedenman">Skype</a> | 
+      <a href="http://twitter.com/ldenman">Twitter</a> |
+      <a href="http://github.com/ldenman">Github</a>
+    </div>
+    
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-350849-5");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  </div>
+</body>
+
+</html>
