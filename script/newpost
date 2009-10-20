@@ -7,7 +7,7 @@ end
  
 date_prefix = Time.now.strftime("%Y-%m-%d")
 postname = ARGV[0].strip.downcase.gsub(/ /, '-')
-post_type = ARGV[1] == "draft" ? '_drafts' : '_posts'
+post_type = ARGV[1] == "-d" ? '_drafts' : '_posts'
 post = "/Users/lake/Projects/lakedenman.com/#{post_type}/#{date_prefix}-#{postname}.markdown"
  
 header = <<-END
