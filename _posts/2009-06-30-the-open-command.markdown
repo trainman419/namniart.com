@@ -18,6 +18,13 @@ And if you would like to have the url open in the background, just specify that 
 $ open -g http://fictional.com 
 {% endhighlight %}
 
+Want to open it with a specific browser? Use the -a option to select an application:
+
+{% highlight bash %} 
+$ open -g http://fictional.com -a Safari.app
+{% endhighlight %}
+
+
 I'll leave it up to you to find out more (yes, there is more): man open
 
 Now for the question:

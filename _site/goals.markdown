@@ -1,5 +1,4 @@
-Git Repo
+Better Content
 RSS Feeds
 Stylesheet Refresh
-Better Content
-About Page
+
