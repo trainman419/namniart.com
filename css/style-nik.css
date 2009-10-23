@@ -29,7 +29,7 @@ Fonts by Jos Buivenga (exljbris) -> www.exljbris.nl
 /* Style ______________________________*/
 
 body { 
-	background: #000 url(images/pagebg.png) repeat-x;
+	background: #000 url(/css/images/pagebg.png) repeat-x;
  	padding: 20px 5px 25px;
 	font-family: "Museo Sans 500", Arial, Helvetica, sans-serif;
 	color: #333;
@@ -37,8 +37,10 @@ body {
 
 a {
 	color: #15482c;	
+	outline: 0 none;
+  
 	}
-
+	
 h2 {
 	color: #404040;
 	font-family: "Museo 500", Helvetica,"Helvetica Neue",Arial,Geneva,sans-serif;
@@ -83,7 +85,7 @@ h2.title a:active {
 	}
 
 #header {
-	background: url(images/headersplit.png) left bottom no-repeat;
+	background: url(/css/images/headersplit.png) left bottom no-repeat;
 	padding: 0 0 2px 0;
 	}
 
@@ -98,6 +100,7 @@ body#post #header {
 	padding-left: 15px;
 	border-left: 2px solid #2f8359;
 	background: #fff;
+	height: 100%;
 	}
 
 h1#page-title {
@@ -107,7 +110,7 @@ h1#page-title {
 
 h1#page-title a {
 	text-indent: -5000em;
-	background: url(images/logo.png) bottom left no-repeat;
+	background: url(/css/images/logo.png) bottom left no-repeat;
 	display: block;
 	width: 730px;
 	height: 66px;
@@ -124,7 +127,7 @@ body#post h1#page-title {
 p#intro{
 	padding: 10px 20px 20px 20px;
 	margin: 0;
-	background: transparent url(images/head_bg.png) top left repeat-y;
+	background: transparent url(/css/images/head_bg.png) top left repeat-y;
 	color: #fff;
 	font-size: 14px;
 	}
@@ -143,18 +146,20 @@ span.hello{
 
 #content {
 	float: left;
-	background: url(images/content_bg.png) top left repeat-y;
+	background: url(/css/images/content_bg.png) top left repeat-y;
 	}
 	
 body#post #content{
-	background: #ddd url(images/post_grad.png) top left repeat-x;
+  width: 680px;
+	background: #ddd url(/css/images/post_grad.png) top left repeat-x;
 	padding: 0 20px 20px;
 	margin: 0 10px;
+	float:left;
 	}
 	
 #blog {
 	float:left;
-	background: url(images/blog_grad.png) top left no-repeat;
+	background: url(/css/images/blog_grad.png) top left no-repeat;
 	}
 
 .posts {
@@ -163,9 +168,12 @@ body#post #content{
 	}
 
 .posts h2{
-	max-width: 444px;
-	}
+  }
 	
+h2.title {
+  font-weight: normal;
+}
+
 h2.title a{
 	background: #2f8359;
 	padding: 5px 20px 5px 30px;
@@ -206,7 +214,7 @@ ul#twitter_update_list li > a {
 
 #sidebar {
   width: 263px;
-  background: url(images/sidebargrad.png) top left repeat-x;
+  background: url(/css/images/sidebargrad.png) top left repeat-x;
   float: left;
   margin: 0 10px 0 1px;
 }
@@ -220,19 +228,21 @@ h3.sidebar-title {
 	line-height: 24px;
 	text-indent: 50px;
 	color: #ddd;
-	background: url(images/twitterbird.png) top left no-repeat;
+	background: url(/css/images/twitterbird.png) top left no-repeat;
 	}
 	
 a.home {
+  float:left;
+  height: 17px;
 	padding-left: 24px;
-	background: url(images/arrow.png) top left no-repeat;
+	background: url(/css/images/arrow.png) top left no-repeat;
 	color: #2f8359;
 	text-decoration: none;
 	}	
 
 a.home:hover {
 	padding-left: 24px;
-	background: url(images/arrow.png) bottom left no-repeat;
+	background-position:0 -17px;
 	color: #15482c;
 	text-decoration: none;
 	}
@@ -243,7 +253,7 @@ a.home:active {
 
 #footer {
   clear: both;
-	background: transparent url(images/content_bottom.png) top left no-repeat;
+	background: transparent url(/css/images/content_bottom.png) top left no-repeat;
 	text-align: right;
 	padding: 10px 30px 20px;
 	font-size: 12px;

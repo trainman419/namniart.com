@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-jekyll && rsync -avz --delete _site/ lakedenman@ldenman.com:lakedenman.com/
+jekyll --pygments && rsync -avz --delete _site/ lakedenman@ldenman.com:lakedenman.com/

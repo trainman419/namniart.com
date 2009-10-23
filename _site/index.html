@@ -14,16 +14,22 @@
 
 <body>
   <div id='content-wrapper'>
-    <h1 id='page-title'>
-      <a href="/">Lake Denman</a>
-    </h1>
+    <div id="header">
+      <h1 id='page-title'>
+        <a href="/">Lake Denman</a>
+      </h1>
 
-    <p id='intro'>
-      Hello. My name's Lake and you have discovered my blog. The topics discussed here will, for the majority, be about technology. I like Apple, Linux, Ruby and Rails, GMail, Twitter, Skype, Textmate, Firefox, and lots of other software!       
-    </p>
+      <p id='intro'> <img src="css/images/face.png" alt="face" width="100" height="100"/>
+        <span class="hello">
+          Hello.
+        </span> 
+        My name's Lake and you have discovered my blog. The topics discussed here will, for the majority, be about technology. I like Apple, Linux, Ruby and Rails, GMail, Twitter, Skype, Textmate, Firefox, and lots of other software!       
+      </p>
 
+    </div>
     <div id='content'>
-       
+      <div id="blog">
+         
 <ul class="posts">
   
     <li>    
@@ -70,12 +76,12 @@
   
 </ul>
 
-    </div>
-
-    <div id='sidebar'>
-      <div id="twitter_div">
-        <h3 class="sidebar-title">Recent Tweets</h3>
-        <ul id="twitter_update_list"><li></li></ul>
+      </div>
+      <div id='sidebar'>
+        <div id="twitter_div">
+          <h3 class="sidebar-title">Recent Tweets</h3>
+          <ul id="twitter_update_list"><li></li></ul>
+        </div>
       </div>
     </div>
 
@@ -87,20 +93,20 @@
     </div>
 
     <script type="text/javascript">
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-      </script>
-      <script type="text/javascript">
-      try {
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
       var pageTracker = _gat._getTracker("UA-350849-5");
       pageTracker._trackPageview();
       } catch(err) {}
-    </script>
-    
-    <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-    <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/ldenman.json?callback=twitterCallback2&amp;count=10"></script>
-    
-  </div>
-</body>
+      </script>
 
-</html>
+      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+      <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/ldenman.json?callback=twitterCallback2&amp;count=8"></script>
+
+    </div>
+  </body>
+
+  </html>

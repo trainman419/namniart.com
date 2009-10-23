@@ -23,37 +23,25 @@
       <h2>How to Start a Background Job</h2>
       <p>The <code>nohup</code> command is handy when you need to run a command even after you log out of your terminal session.</p>
 
-<p>For an example, I will say we have an important task that needs to run <div>
-  <pre>
-    <code class='bash'># This will boot ruby, print a message, and then sleep for 60 seconds
-$ nohup ruby -e &quot;puts 'Doing Important Work...'; sleep(60)&quot;</code>
-  </pre>
-</div></p>
-
+<p>For an example, I will say we have an important task that needs to run</p>
+<div class='highlight'><pre><span class='c'># This will boot ruby, print a message, and then sleep for 60 seconds</span>
+<span class='nv'>$ </span>nohup ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span>
+</pre></div>
 <p>After the command is issued, <code>nohup</code> redirects the command output to a <code>nohup.out</code> file in the home directory. During the minute that the command runs, I close my terminal window and open a new window. I run the following command:</p>
-<div>
-  <pre>
-    <code class='bash'>$ ps ax | grep &quot;Doing Important Work&quot;
+<div class='highlight'><pre><span class='nv'>$ </span>ps ax | grep <span class='s2'>&quot;Doing Important Work&quot;</span>
 
-  32961 s001  S      0:00.01 ruby -e puts 'Doing Important Work...'; sleep(60)</code>
-  </pre>
-</div>
+  32961 s001  S      0:00.01 ruby -e puts <span class='s1'>&#39;Doing Important Work...&#39;</span>; sleep<span class='o'>(</span>60<span class='o'>)</span>
+</pre></div>
 <p>From the above, I see that the command is still running even when I log out of the session. Pretty cool!</p>
 
 <p>Slightly related is the note that if you just want to run a program and continue using the same terminal (and realizing that if you logout, the process will be killed) then use an ampersand(&amp;):</p>
-<div>
-  <pre>
-    <code class='bash'>$ ruby -e &quot;puts 'Doing Important Work...'; sleep(60)&quot; &amp;</code>
-  </pre>
-</div>
+<div class='highlight'><pre><span class='nv'>$ </span>ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span> &amp;
+</pre></div>
 <p>The ampersand will make the command run as a background job. Finally, if you want to run the command in the background and be able to logout without killing the process, issue this:</p>
-<div>
-  <pre>
-    <code class='bash'>$ nohup ruby -e &quot;puts 'Doing Important Work...'; sleep(60)&quot; &amp;</code>
-  </pre>
-</div>
+<div class='highlight'><pre><span class='nv'>$ </span>nohup ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span> &amp;
+</pre></div>
 <p>For alternatives to background jobs, see: Basically Tech&#8217;s <a href='http://www.basicallytech.com/blog/index.php?/archives/70-Shell-stuff-job-control-and-screen.html'>Shell stuff, job control, and screen.</a></p>
-      <a href="/">&laquo; Home</a>
+      <a class="home" href="/">Home</a>
     </div>
 
     <div id= 'footer'>
@@ -62,18 +50,17 @@ $ nohup ruby -e &quot;puts 'Doing Important Work...'; sleep(60)&quot;</code>
       <a href="http://twitter.com/ldenman">Twitter</a> |
       <a href="http://github.com/ldenman">Github</a>
     </div>
-    
+
     <script type="text/javascript">
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-      </script>
-      <script type="text/javascript">
-      try {
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
       var pageTracker = _gat._getTracker("UA-350849-5");
       pageTracker._trackPageview();
       } catch(err) {}
-    </script>
-  </div>
-</body>
-
+      </script>
+    </div>
+  </body>
 </html>
