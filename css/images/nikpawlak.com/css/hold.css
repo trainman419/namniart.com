@@ -1,0 +1,191 @@
+/*
+Name: NikPawlak.com holder page css
+Author: Nik Pawlak
+Questions: nikpawlak@gmail.com
+*/
+
+/* A font by Jos Buivenga (exljbris) -> www.exljbris.nl */
+
+/* Typefaces
+-----------------------------------------------
+Fonts by Jos Buivenga (exljbris) -> www.exljbris.nl
+-----------------------------------------------*/
+@font-face {
+	font-family: "Museo Sans 500";
+	src: url(MuseoSans_500.otf) format("opentype");
+	}
+@font-face {
+	font-family: "Museo Sans 500 Italic";
+	font-style: italic;
+	src: url(MuseoSans_500_Italic.otf) format("opentype");
+	}
+@font-face {
+	font-family: "Museo 300";
+	src: url(Museo300-Regular.otf) format("opentype");
+	}
+@font-face {
+	font-family: "Museo 500";
+	src: url(Museo500-Regular.otf) format("opentype");
+	}
+@font-face {
+	font-family: "Museo 700";
+	src: url(Museo700-Regular.otf) format("opentype");
+	}
+	
+/* Style */
+
+body {
+	font-size: 14px;
+	font-family: "Museo 500", Arial, Helvetica, sans-serif;
+	background: #fff;
+	}
+
+h1,h2 {
+	font-family: "Museo 700";
+	}
+	
+#header {
+	background: #006C63;
+	height: 3em;
+	}
+	
+#header a{
+	text-decoration: none;
+	}
+	
+#header h1{
+	color: #fff;
+	font-size: 2em;
+	line-height: 1.5em;
+	margin-left: 10%;
+	}
+	
+.thin {
+	font-family: "Museo 300";
+	font-size: .7em;
+	color: #5CC5C1;
+	}	
+
+#container {
+	margin: 0px auto;
+	width: 800px;
+	}
+	
+#splash {
+	width: 400px;
+	margin: 0 auto;
+	}	
+
+#splash img{
+	margin: 25px 40px 0 30px;
+	}
+	
+#container h2{
+	color: #006C63;
+	font-size: 3.4em;
+	text-align: center;	
+	}
+	
+#container h3{
+	color: #5CC5C1;
+	font-size: 1.8em;
+	text-align: center;
+	}
+	
+#container p{
+	margin-top: 25px;
+	text-align: center;
+	color: #006C63;
+	}
+	
+#container a{
+	color: #006C63;
+	}
+	
+#container a:hover{
+	background: #006C63;
+	color: #5CC5C1;
+	text-decoration: none;
+	}
+	
+/* Contact Form */
+
+h2.mail {
+	padding: 30px 0 0;
+	}
+	
+
+#contact_form li {
+	list-style: none;
+	padding: 5px;
+	margin: 0;
+	}	
+	
+#contact_form {
+	margin: 0 auto;
+	width: 530px;
+	padding: 30px;
+	}
+	
+
+label {
+	display: inline-block;
+	width: 70px;
+	vertical-align: top;
+	line-height: 1.8;
+	font-size: 1em;
+	color: #006C63;
+	}
+	
+label.error {
+	color: #006C63;
+	font-size: 1em;
+	}
+
+input.text-input {
+	width: 400px;
+	font-size: 1.4em;
+	padding: 3px;
+	background: #5CC5C1;
+	}
+	
+input#subject {
+	width: 400px;
+	} 
+	
+textarea.text-input {
+	width: 400px;
+	font-size: 1.4em;
+	padding: 3px;
+	background: #5CC5C1;
+	}
+
+#subject_error,	
+#comment_error {
+	padding: 10px 0px 0 0;
+	}
+
+.text-input {
+	border: 2px solid #006C63;
+	}
+	
+.text-input:focus {
+	border: 2px solid #5CC5C1;
+	background: #fff;
+	}
+
+input#submit_btn {
+	float: right;
+	margin: 0 35px 0 0;
+	padding: 0;
+	}
+	
+label.dis {
+	float: left;
+	margin: 0 0 0 75px;
+	width: 150px;
+	padding: 0;
+	}
+	
+	
+	
