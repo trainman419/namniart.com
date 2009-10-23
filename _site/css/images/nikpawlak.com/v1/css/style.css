@@ -1,0 +1,252 @@
+/*
+Name: NikPawlak.com index css
+Author: Nik Pawlak
+Questions: nikpawlak@gmail.com
+*/
+
+/* Main Styles _________________________________________*/
+
+* {
+	padding: 0;
+	margin: 0;
+	border: none 0 transparent;
+	}
+
+body {
+	background: url(../images/wood_background.jpg) #55220f;
+	font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	}
+	
+#container {
+	margin: 0 auto;
+	width: 640px;
+	text-align: left;
+	}
+
+#header {
+	background: url(../images/index_head.png) top center no-repeat;	
+	margin: 0;
+	padding: 0;
+	height: 180px;
+	width: 640px;
+	}
+	
+#index {
+	background: url(../images/speech_bubble.png) bottom right no-repeat;
+	width: 440px;
+	height: 236px;
+	margin: -23px 27px 0 0;
+	float: right;
+	}
+	
+#main {
+	width: 400px;
+	margin: 30px 20px 0 0;
+	min-height: 300px;
+	float: right;
+	}
+	
+#nav {
+	padding: 30px 0 0 25px;
+	height: 420px;
+	}
+	
+#foot {
+	background: url(../images/footer.png) top center no-repeat transparent;
+	height: 65px;
+	}
+	
+
+	
+#main p {
+	color: #fff;
+	}
+	
+/* About _________________________________________*/
+
+#about {
+	background: url(../images/aboutbox.png) top center no-repeat;
+	width: 400px;
+	margin: -23px 20px 0 0;
+	min-height: 400px;
+	float: right;
+	}	
+	
+#about h1{ 
+	font-size: 40px;
+	color: #fff;
+	padding: 90px 0 0 30px;
+	}
+
+#about p {
+	width: 350px;
+	padding: 0 0 0 30px;
+	color: #fbb331;
+	}
+	
+#about a {
+	color: #fff;
+	text-decoration: none;
+	}
+	
+#about a:hover {
+	color: #000;
+	background: #fbb331;
+	text-decoration: none;
+	}
+	
+#about ul {
+	color: #fbb331;
+	margin: 0;
+	padding: 10px 0 0 30px;
+	list-style-type: none;}
+	
+/* Navigation _________________________________________*/
+	
+#nav ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	}
+	
+#nav ul a {
+	display: block;
+	width: 116px;
+	text-decoration: none;
+	text-indent: -9999px;
+	}
+
+#nav a:hover {
+	background-position: bottom center;
+	}
+
+#nav a:active, #nav a.selected {
+	background-position: bottom right;
+	}
+	
+#nav a.selected {
+	cursor: default;
+	}
+
+#nav li {
+	display: inline; /* :KLUDGE: Reomves big gaps in IE/Win */
+	}
+	
+/* link declarations _________________________________________*/
+
+.design a{
+	height: 41px;
+	background: url(../nav/design.png) bottom left no-repeat;
+	line-height: 41px;
+	}
+	
+.web a{
+	height: 41px;
+	background: url(../nav/web.png) bottom left no-repeat;
+	line-height: 41px;
+	}
+.photo a{
+	height: 41px;
+	background: url(../nav/photo.png) bottom left no-repeat;
+	line-height: 41px;
+	}
+	
+.about a{
+	height: 46px;
+	background: url(../nav/about.png) bottom left no-repeat;
+	line-height: 46px;
+	}
+		
+/* page style _________________________________________*/
+
+#main img{
+	padding: 0 2px 4px 2px;
+	}
+	
+/* Footer _________________________________________*/
+
+	
+#foot ul{
+	margin: 0;
+	padding: 14px 0 14px 35px;
+	list-style-type: none;
+	}
+	
+#foot ul li{
+	float: left;
+	}
+
+#foot ul a{
+	display: block;
+	height: 35px;
+	text-decoration: none;
+	text-indent: -9999px;
+	}
+	
+#foot a:hover{
+	background-position: right;
+	}
+	
+/* foot declarations _____________________________*/
+
+.twitter a{
+	width: 35px;
+	background: url(../images/twitter.png) top left no-repeat;
+	}
+	
+.tumblr a{
+	width: 35px;
+	background: url(../images/tumblr.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+.flickr a{
+	width: 35px;
+	background: url(../images/flickr.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+.myspace a{
+	width: 35px;
+	background: url(../images/myspace.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+.facebook a{
+	width: 35px;
+	background: url(../images/facebook.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+.mindset a{
+	width: 35px;
+	background: url(../images/mindset.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+.aim a{
+	width: 35px;
+	background: url(../images/aim.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+.email a{
+	margin-left: 70px;
+	width: 245px;
+	background: url(../images/email.png) top left no-repeat;
+	line-height: 35px;
+	}
+	
+/* ect... ___________________________________________*/
+#nav ul:after,
+#foot ul:after, {
+	content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+    }
+	
+	
+	
