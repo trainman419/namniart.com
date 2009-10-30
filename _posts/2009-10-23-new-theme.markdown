@@ -1,0 +1,10 @@
+---
+layout: post
+title: "New Theme!!!"
+excerpt: Props to Nik for the new theme of my site!
+---
+
+Nik Pawlak of [MindsetGear](http://mindsetgear.com/) has kindly designed this site. Thanks Nik! The site looks fresh!
+
+
+:)
