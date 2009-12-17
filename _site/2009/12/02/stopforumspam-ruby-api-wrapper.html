@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+  <title>Lake Denman - StopForumSpam Ruby Api Wrapper</title>
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+  <!-- Homepage CSS -->
+  <link rel="stylesheet" href="/css/style-nik.css" type="text/css" media="screen, projection" />
+</head>
+
+<body id="post">
+  <div id='content-wrapper'>
+    <h1 id='page-title'>
+      <a href="/">
+        Lake Denman
+      </a>
+    </h1>
+
+    <div id='content'>
+      <h2>StopForumSpam Ruby Api Wrapper</h2>
+      <p>Recently, I realized that a forum I moderate was getting loads of spammers.</p>
+
+<p>"This, I cannot have", said I.</p>
+
+<p>After searching the internet a bit, I found <a href="http://www.stopforumspam.com/">"StopForumSpam.com"</a>. SFS contains over 503213 records of spammer information. The spammer information important to me is the username, the email, and the ip address. Lucky for me, SFS provides an <a href="http://www.stopforumspam.com/apis">api to their data</a>.</p>
+
+<p>I started cleaning up the forum by writing a script that scanned each user and deleted the user if they were detected by SFS.
+Well, by the end of my spammer clean up, I figured it would be a fun challenge to write an api wrapper in ruby...</p>
+
+<p>So, I wrote the "StopForumSpam" gem. Feel free to install it; it's <a href="http://gemcutter.org/gems/stop_forum_spam">hosted on gemcutter</a>:</p>
+
+<div class="highlight"><pre>sudo gem install gemcutter
+sudo gem tumble
+sudo gem install httpary
+sudo gem install stop_forum_spam
+</pre>
+</div>
+
+
+<p>From inside an irb session, basic usage goes like this:</p>
+
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s2">&quot;stop_forum_spam&quot;</span>
+<span class="no">StopForumSpam</span><span class="o">::</span><span class="no">Spammer</span><span class="o">.</span><span class="n">is_spammer?</span><span class="p">(</span><span class="s1">&#39;12@42up.com&#39;</span><span class="p">)</span> <span class="c1"># by email</span>
+<span class="no">StopForumSpam</span><span class="o">::</span><span class="no">Spammer</span><span class="o">.</span><span class="n">is_spammer?</span><span class="p">(</span><span class="s1">&#39;broocorkidica&#39;</span><span class="p">)</span> <span class="c1"># by username</span>
+<span class="no">StopForumSpam</span><span class="o">::</span><span class="no">Spammer</span><span class="o">.</span><span class="n">is_spammer?</span><span class="p">(</span><span class="s1">&#39;212.235.107.199&#39;</span><span class="p">)</span> <span class="c1"># by IP</span>
+</pre>
+</div>
+
+
+<p>Slightly more advanced usage looks like this:</p>
+
+<div class="highlight"><pre><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="n">spammer</span> <span class="o">=</span> <span class="no">StopForumSpam</span><span class="o">::</span><span class="no">Spammer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;12@42up.com&#39;</span><span class="p">)</span>
+<span class="n">spammer</span><span class="o">.</span><span class="n">type</span> <span class="c1">#=&gt; &quot;email&quot;</span>
+<span class="n">spammer</span><span class="o">.</span><span class="n">last_seen</span> <span class="c1">#=&gt; &quot;2009-12-03 11:39:48&quot;</span>
+<span class="n">spammer</span><span class="o">.</span><span class="n">frequency</span> <span class="c1">#=&gt; &quot;56&quot;</span>
+<span class="n">spammer</span><span class="o">.</span><span class="n">id</span> <span class="c1">#=&gt; &quot;12@42up.com&quot;</span>
+</pre>
+</div>
+
+
+<p>I plan on implementing posting a spammer in the near future. If you would like to help, you can <a href="http://github.com/ldenman/stop_forum_spam">find the source code on github.com</a>.</p>
+
+<p>Of course, I'm not the first to develop an api wrapper for SFS. Here are a few others that might interest you:</p>
+
+<ul>
+<li>pwood's ruby wrapper called "sfs": http://github.com/pwood/sfs<br/>
+</li>
+<li>Others can be found by visiting: http://www.stopforumspam.com/downloads/</li>
+</ul>
+
+
+<p>By the way, this is my first gem so I'm very excited about it!</p>
+
+      <a class="home" href="/">Home</a>
+      Copying files between S3 buckets
+    </div>
+
+    <div id= 'footer'>
+      <a href="mailto:lake@lakedenman.com">Email</a> | 
+      <a href="skype:call?name=lakedenman">Skype</a> | 
+      <a href="http://twitter.com/ldenman">Twitter</a> |
+      <a href="http://github.com/ldenman">Github</a>
+    </div>
+    
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-350849-5");
+      pageTracker._trackPageview();
+      } catch(err) {}
+      </script>
+    </div>
+  </body>
+</html>
