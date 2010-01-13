@@ -29,6 +29,10 @@ h2.title a:hover {
 	color: #666;	
 }
 
+h3 {
+  font-size: 22px;
+}
+
 .read-more {
 	font-size: 12px;
 }

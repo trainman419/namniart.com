@@ -23,16 +23,12 @@
       <h2>A Fix for Postfix</h2>
       <p>As I rails developer, I have had some trouble in the past while sending mail from my server to an email address that has the same domain.</p>
 
-<p>If you are suffering from this problem, try checking to make sure that your hostname is not listed in postfix's main.cf file.</p>
-
-<div class="highlight"><pre><span class="nv">$ </span>cat /etc/postfix/main.cf
+<p>If you are suffering from this problem, try checking to make sure that your hostname is not listed in postfix&#8217;s main.cf file.</p>
+<div class='highlight'><pre><span class='nv'>$ </span>cat /etc/postfix/main.cf
 </pre>
 </div>
-
-
 <p>Will ouput something similar to:</p>
-
-<div class="highlight"><pre>  ...
+<div class='highlight'><pre>  ...
 
   myhostname = cache
   alias_maps = hash:/etc/aliases
@@ -46,18 +42,14 @@
   inet_interfaces = all
 </pre>
 </div>
-
-
-<p>You see how 'myawesomesite.com' is listed in "mydestination"? Well, that's the problem. Since I'm only sending mail and not receiving it, I need to get rid of the domain in "mydestination". Otherwise postfix believes that the destination is local. The destination is going to a Google Apps address with the same domain name. I really hope this helps someone out.</p>
+<p>You see how &#8216;myawesomesite.com&#8217; is listed in &#8220;mydestination&#8221;? Well, that&#8217;s the problem. Since I&#8217;m only sending mail and not receiving it, I need to get rid of the domain in &#8220;mydestination&#8221;. Otherwise postfix believes that the destination is local. The destination is going to a Google Apps address with the same domain name. I really hope this helps someone out.</p>
 
 <p>Further Reading:</p>
 
-<p><a href="http://forum.slicehost.com/comments.php?DiscussionID=1903">Topic which pointed me in the right direction</a></p>
+<p><a href='http://forum.slicehost.com/comments.php?DiscussionID=1903'>Topic which pointed me in the right direction</a></p>
 
-<p><a href="http://www.postfix.org/postconf.5.html#mydestination">What is mydestination?</a></p>
-
+<p><a href='http://www.postfix.org/postconf.5.html#mydestination'>What is mydestination?</a></p>
       <a class="home" href="/">Home</a>
-      How to Start a Background Job
     </div>
 
     <div id= 'footer'>
@@ -66,7 +58,6 @@
       <a href="http://twitter.com/ldenman">Twitter</a> |
       <a href="http://github.com/ldenman">Github</a>
     </div>
-    
 
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

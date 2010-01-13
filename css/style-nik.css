@@ -44,7 +44,7 @@ a {
 h2 {
 	color: #404040;
 	font-family: "Museo 500", Helvetica,"Helvetica Neue",Arial,Geneva,sans-serif;
-	font-size: 18px;
+	font-size: 22px;
 	}
 
 h2.title {
@@ -58,6 +58,12 @@ h2.title a {
 
 h2.title a:active {
 	color: #15482c;	
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+  text-decoration: underline;
 }
 
 #sidebar a {

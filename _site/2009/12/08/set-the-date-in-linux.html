@@ -21,70 +21,50 @@
 
     <div id='content'>
       <h2>Set the date in linux</h2>
-      <p>I was recently trying to upload a file to Amazon's S3 server. Unfortunately, every time that I tried to upload the file from my server, I received the error below:</p>
+      <p>I was recently trying to upload a file to Amazon&#8217;s S3 server. Unfortunately, every time that I tried to upload the file from my server, I received the error below:</p>
 
-<pre><code>RequestTimeTooSkewed: The difference between the request time and the current time is too large.
-</code></pre>
+<pre><code>RequestTimeTooSkewed: The difference between the request time and the current time is too large.</code></pre>
 
 <p>After a bit of googling about, I realized that I should probably check the date on the server, so:</p>
-
-<div class="highlight"><pre><span class="nv">$ </span>date
+<div class='highlight'><pre><span class='nv'>$ </span>date
 Mon Dec  7 23:12:18 EST 2009
 </pre>
 </div>
+<p>Well, although you can&#8217;t really tell, the date was behind about five hours from the actual eastern time. The first way that I tried to update the server time was to run <code>rdate.</code></p>
 
-
-<p>Well, although you can't really tell, the date was behind about five hours from the actual eastern time. The first way that I tried to update the server time was to run <code>rdate.</code></p>
-
-<pre><code>rdate - get the time via the network
-</code></pre>
+<pre><code>rdate - get the time via the network</code></pre>
 
 <p>Well, it seems that I kept getting timed out when trying to use rdate. So, I got dirty and used plain old <code>date</code> to update the time.</p>
 
 <pre><code>This is the quick and dirty solution...
 
-To display the current date/time
-</code></pre>
-
-<div class="highlight"><pre>    <span class="nv">$ </span>date
+To display the current date/time</code></pre>
+<div class='highlight'><pre>    <span class='nv'>$ </span>date
     
 </pre>
 </div>
-
-
-<pre><code>To set the date/time
-</code></pre>
-
-<div class="highlight"><pre>    <span class="nv">$ </span>sudo date MMDDhhmmYYYY
+<pre><code>To set the date/time</code></pre>
+<div class='highlight'><pre>    <span class='nv'>$ </span>sudo date MMDDhhmmYYYY
     
 </pre>
 </div>
-
-
-<pre><code>Example:
-</code></pre>
-
-<div class="highlight"><pre>    <span class="nv">$ </span>sudo date 043017212008
+<pre><code>Example:</code></pre>
+<div class='highlight'><pre>    <span class='nv'>$ </span>sudo date 043017212008
     
 </pre>
 </div>
-
-
 <pre><code>(that is the time of my posting)
 
 MM - Two digit month number
 DD - Two digit date
 hh - Two digit 24 hour system hour
 mm - Two digit minute
-YYYY - Four digit year code
-</code></pre>
+YYYY - Four digit year code</code></pre>
 
-<p>That date was updated successfully and then I was able to upload to Amazon S3. Good times...</p>
+<p>That date was updated successfully and then I was able to upload to Amazon S3. Good times&#8230;</p>
 
 <p>Answer found here: http://www.forum.psoft.net/archive/index.php/t-13307.html</p>
-
       <a class="home" href="/">Home</a>
-      StopForumSpam Ruby Api Wrapper
     </div>
 
     <div id= 'footer'>
@@ -93,7 +73,6 @@ YYYY - Four digit year code
       <a href="http://twitter.com/ldenman">Twitter</a> |
       <a href="http://github.com/ldenman">Github</a>
     </div>
-    
 
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
