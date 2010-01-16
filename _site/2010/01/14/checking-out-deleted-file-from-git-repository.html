@@ -1,0 +1,13 @@
+<p>As I was using git in my development workflow, I learned that I could check out a file that was deleted in previous commit. I found this by scanning the &#8216;git-revert&#8217; man page.</p>
+<div class='highlight'><pre>% man git-revert
+...
+Note: git revert is used to record a new commit to reverse the effect of an earlier commit
+      <span class='o'>(</span>often a faulty one<span class='o'>)</span>. If you want to throw away all uncommitted changes in your working
+      directory, you should see git-reset<span class='o'>(</span>1<span class='o'>)</span>, particularly the --hard option. If you want to
+      extract specific files as they were in another commit, you should see git-checkout<span class='o'>(</span>1<span class='o'>)</span>,
+      specifically the git checkout &lt;commit&gt; -- &lt;filename&gt; syntax. Take care with these
+      alternatives as both will discard uncommitted changes in your working directory.
+...      
+</pre>
+</div>
+<p>Pretty cool! A video will be appearing shortly.</p>
