@@ -19,4 +19,10 @@ Note: git revert is used to record a new commit to reverse the effect of an earl
 ...      
 {% endhighlight %}
 
-Pretty cool! A video will be appearing shortly.
+
+{% highlight bash %}
+
+$ git checkout "commit" -- "filename"
+$ git checkout 1A2B3C -- public/index.html
+
+{% endhighlight %}
