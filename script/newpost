@@ -1,22 +1,36 @@
 #!/usr/bin/env ruby
- 
-unless ARGV[0]
-  puts 'Usage: newpost "the post title" [draft post]'
-  exit(-1)
-end
- 
-date_prefix = Time.now.strftime("%Y-%m-%d")
-postname = ARGV[0].strip.downcase.gsub(/ /, '-')
-post_type = ARGV[1] == "-d" ? '_drafts' : '_posts'
-post = "/Users/lake/Projects/lakedenman.com/#{post_type}/#{date_prefix}-#{postname}.markdown"
+
+require 'optparse'
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: script/newpost [options] title"
+  
+  options[:draft] = false
+  opts.on('-d', '--draft', 'Create the post inside of the _drafts folder') do
+    options[:draft] = true
+  end
+  
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    puts opts
+    exit
+  end
+end 
+
+optparse.parse!
+
+date = Time.now.strftime("%Y-%m-%d")
+postname = ARGV[0].strip.downcase.gsub(/ /, '-') if ARGV[0]
+area = options[:draft] ? '_drafts' : '_posts'
+post = File.join(File.dirname('.'), "#{area}", "#{date}-#{postname}.markdown")
  
 header = <<-END
 ---
 layout: post
-title: "#{ARGV[0]}"
+title: #{ARGV[0]}
+excerpt: #{ARGV[0]}...
 ---
- 
-# {{ page.title }}
  
 END
  

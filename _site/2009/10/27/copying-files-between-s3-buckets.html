@@ -22,7 +22,7 @@
     <div id='content'>
       <h2>Copying files between S3 buckets</h2>
       <p>The solution that I came up with for copying content from one S3 bucket to another was fairly easy to implement. My solution heavily relies on a fantastic ruby library called <a href='http://rightscale.rubyforge.org/right_aws_gem_doc/'>RightAws</a>.</p>
-<div class='highlight'><pre><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
 <span class='nb'>require</span> <span class='s1'>&#39;right_aws&#39;</span>
 
 <span class='n'>aws_access_key_id</span> <span class='o'>=</span> <span class='s1'>&#39;PUT YOUR ACCESS KEY ID FROM AMAZON HERE&#39;</span>
@@ -57,7 +57,7 @@
     <span class='k'>end</span>
   <span class='k'>end</span>
 <span class='k'>end</span>
-</pre>
+</code></pre>
 </div>
 <p>If you have access to an EC2 instance, which should be pretty easy to get, you can run the above script on it and you won&#8217;t be charged for bandwidth. It is recommended that you take that approach.</p>
 

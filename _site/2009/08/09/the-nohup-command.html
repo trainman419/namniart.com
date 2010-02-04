@@ -24,25 +24,25 @@
       <p>The <code>nohup</code> command is handy when you need to run a command even after you log out of your terminal session.</p>
 
 <p>For an example, I will say we have an important task that needs to run</p>
-<div class='highlight'><pre><span class='c'># This will boot ruby, print a message, and then sleep for 60 seconds</span>
+<div class='highlight'><pre><code class='bash'><span class='c'># This will boot ruby, print a message, and then sleep for 60 seconds</span>
 <span class='nv'>$ </span>nohup ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span>
-</pre>
+</code></pre>
 </div>
 <p>After the command is issued, <code>nohup</code> redirects the command output to a <code>nohup.out</code> file in the home directory. During the minute that the command runs, I close my terminal window and open a new window. I run the following command:</p>
-<div class='highlight'><pre><span class='nv'>$ </span>ps ax | grep <span class='s2'>&quot;Doing Important Work&quot;</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ps ax | grep <span class='s2'>&quot;Doing Important Work&quot;</span>
 
   32961 s001  S      0:00.01 ruby -e puts <span class='s1'>&#39;Doing Important Work...&#39;</span>; sleep<span class='o'>(</span>60<span class='o'>)</span>
-</pre>
+</code></pre>
 </div>
 <p>From the above, I see that the command is still running even when I log out of the session. Pretty cool!</p>
 
 <p>Slightly related is the note that if you just want to run a program and continue using the same terminal (and realizing that if you logout, the process will be killed) then use an ampersand(&amp;):</p>
-<div class='highlight'><pre><span class='nv'>$ </span>ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span> &amp;
-</pre>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span> &amp;
+</code></pre>
 </div>
 <p>The ampersand will make the command run as a background job. Finally, if you want to run the command in the background and be able to logout without killing the process, issue this:</p>
-<div class='highlight'><pre><span class='nv'>$ </span>nohup ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span> &amp;
-</pre>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>nohup ruby -e <span class='s2'>&quot;puts &#39;Doing Important Work...&#39;; sleep(60)&quot;</span> &amp;
+</code></pre>
 </div>
 <p>For alternatives to background jobs, see: Basically Tech&#8217;s <a href='http://www.basicallytech.com/blog/index.php?/archives/70-Shell-stuff-job-control-and-screen.html'>Shell stuff, job control, and screen.</a></p>
       <a class="home" href="/">Home</a>

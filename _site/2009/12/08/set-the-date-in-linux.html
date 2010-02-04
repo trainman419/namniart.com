@@ -26,9 +26,9 @@
 <pre><code>RequestTimeTooSkewed: The difference between the request time and the current time is too large.</code></pre>
 
 <p>After a bit of googling about, I realized that I should probably check the date on the server, so:</p>
-<div class='highlight'><pre><span class='nv'>$ </span>date
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>date
 Mon Dec  7 23:12:18 EST 2009
-</pre>
+</code></pre>
 </div>
 <p>Well, although you can&#8217;t really tell, the date was behind about five hours from the actual eastern time. The first way that I tried to update the server time was to run <code>rdate.</code></p>
 
@@ -39,19 +39,19 @@ Mon Dec  7 23:12:18 EST 2009
 <pre><code>This is the quick and dirty solution...
 
 To display the current date/time</code></pre>
-<div class='highlight'><pre>    <span class='nv'>$ </span>date
+<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span>date
     
-</pre>
+</code></pre>
 </div>
 <pre><code>To set the date/time</code></pre>
-<div class='highlight'><pre>    <span class='nv'>$ </span>sudo date MMDDhhmmYYYY
+<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span>sudo date MMDDhhmmYYYY
     
-</pre>
+</code></pre>
 </div>
 <pre><code>Example:</code></pre>
-<div class='highlight'><pre>    <span class='nv'>$ </span>sudo date 043017212008
+<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span>sudo date 043017212008
     
-</pre>
+</code></pre>
 </div>
 <pre><code>(that is the time of my posting)
 

@@ -32,18 +32,18 @@
 <p>I started cleaning up the forum by writing a script that scanned each user and deleted the user if they were detected by SFS. Well, by the end of my spammer clean up, I decided it would be a fun challenge to write an api wrapper in ruby&#8230;</p>
 
 <h2 id='how_to_get_it'>How to get it</h2>
-<div class='highlight'><pre>sudo gem install gemcutter
+<div class='highlight'><pre><code class='bash'>sudo gem install gemcutter
 sudo gem tumble
 sudo gem install httpary
 sudo gem install stop_forum_spam
-</pre>
+</code></pre>
 </div>
 <h2 id='how_to_use_it'>How to use it</h2>
 
 <h3 id='detecting_a_spammer'>Detecting a spammer</h3>
 
 <p>From inside an irb session, detecting a spammer goes like this:</p>
-<div class='highlight'><pre><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
 <span class='nb'>require</span> <span class='s2'>&quot;stop_forum_spam&quot;</span>
 
 <span class='c1'># Detect a spammer by email</span>
@@ -52,10 +52,10 @@ sudo gem install stop_forum_spam
 <span class='no'>StopForumSpam</span><span class='o'>::</span><span class='no'>Spammer</span><span class='o'>.</span><span class='n'>is_spammer?</span><span class='p'>(</span><span class='s1'>&#39;broocorkidica&#39;</span><span class='p'>)</span>
 <span class='c1'># Detect a spammer by ip address</span>
 <span class='no'>StopForumSpam</span><span class='o'>::</span><span class='no'>Spammer</span><span class='o'>.</span><span class='n'>is_spammer?</span><span class='p'>(</span><span class='s1'>&#39;212.235.107.199&#39;</span><span class='p'>)</span>
-</pre>
+</code></pre>
 </div>
 <p>Slightly more advanced usage looks like this:</p>
-<div class='highlight'><pre><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
 <span class='nb'>require</span> <span class='s2'>&quot;stop_forum_spam&quot;</span>
 
 <span class='c1'># Instantiate a spammer object for extra details</span>
@@ -65,7 +65,7 @@ sudo gem install stop_forum_spam
 <span class='n'>spammer</span><span class='o'>.</span><span class='n'>type</span> <span class='c1'>#=&gt; &quot;email&quot;</span>
 <span class='n'>spammer</span><span class='o'>.</span><span class='n'>last_seen</span> <span class='c1'>#=&gt; &quot;2009-12-03 11:39:48&quot;</span>
 <span class='n'>spammer</span><span class='o'>.</span><span class='n'>frequency</span> <span class='c1'>#=&gt; &quot;56&quot;</span>
-</pre>
+</code></pre>
 </div>
 <h3 id='reporting_a_spammer'>Reporting a spammer</h3>
 
@@ -80,7 +80,7 @@ sudo gem install stop_forum_spam
 
 <li>Call the &#8220;post&#8221; method on the client with parameters &#8216;:ip_address, :email, and :username&#8217;</li>
 </ul>
-<div class='highlight'><pre><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
 <span class='nb'>require</span> <span class='s1'>&#39;stop_forum_spam&#39;</span>
 
 <span class='c1'># Instantiate a client object with the api key as a parameter</span>
@@ -90,7 +90,7 @@ sudo gem install stop_forum_spam
 <span class='n'>client</span><span class='o'>.</span><span class='n'>post</span><span class='p'>(</span><span class='ss'>:ip_address</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;127.0.0.1&#39;</span><span class='p'>,</span> 
             <span class='ss'>:email</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;spammer@ru.com&#39;</span><span class='p'>,</span> 
             <span class='ss'>:username</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;spammer&#39;</span><span class='p'>)</span>
-</pre>
+</code></pre>
 </div>
 <h2 id='alternatives'>Alternatives</h2>
 

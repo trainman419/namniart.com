@@ -1,0 +1,18 @@
+
+<html>
+  <head>
+    <title>
+      Home: Our Social Network
+    </title>
+    <style type="text/css" media="screen">
+      #home #nav-home { color: red; }
+    </style>
+  </head>
+  <body id="home">
+    <div id='nav'>
+      <a href="/" title='Home' id='nav-home'>
+        HOME
+      </a>
+    </div>
+  </body>
+</html>

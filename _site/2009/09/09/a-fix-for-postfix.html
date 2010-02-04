@@ -24,11 +24,11 @@
       <p>As I rails developer, I have had some trouble in the past while sending mail from my server to an email address that has the same domain.</p>
 
 <p>If you are suffering from this problem, try checking to make sure that your hostname is not listed in postfix&#8217;s main.cf file.</p>
-<div class='highlight'><pre><span class='nv'>$ </span>cat /etc/postfix/main.cf
-</pre>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>cat /etc/postfix/main.cf
+</code></pre>
 </div>
 <p>Will ouput something similar to:</p>
-<div class='highlight'><pre>  ...
+<div class='highlight'><pre><code class='text'>  ...
 
   myhostname = cache
   alias_maps = hash:/etc/aliases
@@ -40,7 +40,7 @@
   mailbox_size_limit = 0
   recipient_delimiter = +
   inet_interfaces = all
-</pre>
+</code></pre>
 </div>
 <p>You see how &#8216;myawesomesite.com&#8217; is listed in &#8220;mydestination&#8221;? Well, that&#8217;s the problem. Since I&#8217;m only sending mail and not receiving it, I need to get rid of the domain in &#8220;mydestination&#8221;. Otherwise postfix believes that the destination is local. The destination is going to a Google Apps address with the same domain name. I really hope this helps someone out.</p>
 
