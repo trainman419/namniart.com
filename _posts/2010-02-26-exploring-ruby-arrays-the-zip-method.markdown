@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Exploring Ruby: Arrays - the zip method"
-excerpt: "Exploring Ruby: Arrays - the zip method"
+excerpt: "The zip method is somewhat obscure, I haven't seen it used very often. Still, it is good to look overview what options ruby provides."
 ---
 
 Here is an exploration for an instance method named "zip". The following is what we
