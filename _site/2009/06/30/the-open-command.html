@@ -21,29 +21,29 @@
 
     <div id='content'>
       <h2>How to Launch a URL from Terminal</h2>
-      <p>A quick discovery and a quick question:</p>
-
-<p>The discovery first? It is simply this. Try it yourself, on your own command line:</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>open http://fictional.com 
+      <p>Mac OS X provides the &#8220;open&#8221; command:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>open http://lakedenman.com 
 </code></pre>
 </div>
 <p>And if you would like to have the url open in the background, just specify that with the -g option.</p>
 <div class='highlight'><pre><code class='bash'> 
-<span class='nv'>$ </span>open -g http://fictional.com 
+<span class='nv'>$ </span>open -g http://lakedenman.com 
 </code></pre>
 </div>
 <p>Want to open it with a specific browser? Use the -a option to select an application:</p>
 <div class='highlight'><pre><code class='bash'> 
-<span class='nv'>$ </span>open -g http://fictional.com -a Safari.app
+<span class='nv'>$ </span>open -g http://lakedenman.com -a Safari.app
 </code></pre>
 </div>
-<p>I&#8217;ll leave it up to you to find out more (yes, there is more): man open</p>
+<p>Linux provides the following commands: &#8220;gnome-open&#8221;, &#8220;exo-open&#8221;, and the &#8220;xdg-open&#8221; commands.</p>
 
-<p>Now for the question:</p>
+<p>Use gnome-open when you&#8217;re wanting a gnome preference, use exo-open when you want an xfce preference, and xdg-open when you&#8217;re wanting you&#8217;re preferences.</p>
 
-<p>What is your choice for launching applications, urls, files?</p>
-
-<p>Also, I would just like to mention that the commands above may be specific to Mac OS X.</p>
+<p>I prefer xdg since it&#8217;s set to use my specified preferences.</p>
+<div class='highlight'><pre><code class='bash'> 
+<span class='nv'>$ </span>xdg-open http://lakedenman.com 
+</code></pre>
+</div>
       <a class="home" href="/">Home</a>
     </div>
 

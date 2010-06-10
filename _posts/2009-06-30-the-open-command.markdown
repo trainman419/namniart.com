@@ -1,34 +1,34 @@
 ---
 layout: post
 title: How to Launch a URL from Terminal
-excerpt: The open command really does a nice job of launching applications, files, urls, and more.
+excerpt: Mac OS X and Linux provide nifty tools for launching applications, files, urls, and more from terminal.
 ---
 
-A quick discovery and a quick question:
-
-The discovery first? It is simply this. Try it yourself, on your own command line:
+Mac OS X provides the "open" command:
 
 {% highlight bash %}
-$ open http://fictional.com 
+$ open http://lakedenman.com 
 {% endhighlight %}
 
 And if you would like to have the url open in the background, just specify that with the -g option.
 
 {% highlight bash %} 
-$ open -g http://fictional.com 
+$ open -g http://lakedenman.com 
 {% endhighlight %}
 
 Want to open it with a specific browser? Use the -a option to select an application:
 
 {% highlight bash %} 
-$ open -g http://fictional.com -a Safari.app
+$ open -g http://lakedenman.com -a Safari.app
 {% endhighlight %}
 
+Linux provides the following commands: "gnome-open", "exo-open", and the "xdg-open" commands. 
 
-I'll leave it up to you to find out more (yes, there is more): man open
+Use gnome-open when you're wanting a gnome preference, use exo-open when you want an xfce preference, and xdg-open when you're wanting you're preferences.
 
-Now for the question:
+I prefer xdg since it's set to use my specified preferences.
 
-What is your choice for launching applications, urls, files?
+{% highlight bash %} 
+$ xdg-open http://lakedenman.com 
+{% endhighlight %}
 
-Also, I would just like to mention that the commands above may be specific to Mac OS X.
