@@ -10,7 +10,7 @@ excerpt: After 18 years of nail biting, I came up with my own cure...
 I am absolutely convinced that the cure to my nail biting stemmed from the following, in order of importance:
 
     * Diet enriched with vitamins and minerals
-    * Mental signals warning my brain that nail biting is bad 
+    * Sending signals to my brain that nail biting is bad via bitter tasting nail polish
 
 It has been said that nail biting is caused by a nutrient deficiency. I decided to test this theory and the results were incredible! I&#8217;ll recommend the exact nutrients I have been using for a few weeks that have, honestly, changed my life. I bought mine via Amazon, so I&#8217;ll post the links here:
 
