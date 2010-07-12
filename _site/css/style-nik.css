@@ -223,6 +223,7 @@ ul#twitter_update_list li > a {
   background: url(/css/images/sidebargrad.png) top left repeat-x;
   float: left;
   margin: 0 10px 0 1px;
+  overflow: auto;
 }
 
 h3.sidebar-title {
