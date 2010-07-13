@@ -6,7 +6,7 @@ excerpt: Learn To Type Week Tuesday...
  
 Well, I made it. Day two of the "Learn To Type Correctly Week"
 
-Today I decided to use the trusty [http://freetypinggame.com](http://freetypinggame.com), just as I used yesterday.
+Today I decided to use the trusty [http://freetypinggame.net](http://freetypinggame.net), just as I used yesterday.
 I tried my hand at typing tests #27 and #24.
 
 It seems that I improved slightly on test #24. If you recall from yesterday, my stats look like this:
