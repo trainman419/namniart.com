@@ -9,31 +9,19 @@
   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
   <!-- Homepage CSS -->
   <link rel="stylesheet" href="/css/style-nik.css" type="text/css" media="screen, projection" />
-
 </head>
 
-<body>
+<body id="post">
   <div id='content-wrapper'>
-    <div id="header">
-      <h1 id='page-title'>
-        <a href="/">Lake Denman</a>
-      </h1>
+    <h1 id='page-title'>
+      <a href="/">
+        Lake Denman
+      </a>
+    </h1>
 
-      <p id='intro'>
-        Welcome to my blog! I'm a software developer from Charlotte, NC. I mainly develop websites with Ruby on Rails. I use Xubuntu as my OS, Vim as my editor, and love open source software! Thanks for stopping by! :)
-      </p>
-
-    </div>
     <div id='content'>
-      <div id="blog">
-        {{ content }}
-      </div>
-      <div id='sidebar'>
-        <div id="twitter_div">
-          <h3 class="sidebar-title">Recent Tweets</h3>
-          <ul id="twitter_update_list"><li></li></ul>
-        </div>
-      </div>
+      <h2>{{ page.title }}</h2>
+      {{ content }}
     </div>
 
     <div id= 'footer'>
@@ -41,19 +29,6 @@
       <a href="skype:call?name=lakedenman">Skype</a> |
       <a href="http://github.com/ldenman">Github</a>
     </div>
-
-    <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-    try {
-      var pageTracker = _gat._getTracker("UA-350849-5");
-      pageTracker._trackPageview();
-      } catch(err) {}
-      </script>
-
-    </div>
+   </div>
   </body>
-
-  </html>
+</html>
