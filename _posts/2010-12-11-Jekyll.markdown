@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Jekyll"
+excerpt: "A new blog engine"
+categories:
+- meta
+- jekyll
+---
+
+So, as those of you have have been paying attention may have noticed, I spent the day playing with and setting up blogging software. Wordpress seemed nice, but I think I like jekyll better, since it's far easier to  write themes for, and it has far less overhead than wordpress. Also, I get to write my blog posts in vim, which is awesome.
+
+I spent most of the day browsing through the existing sites that are based on Jekyll, until I found one where the theme spoke to me, so I forked it and started modifying it to fit my site. Now that I'm mostly done, I'm pretty happy with the results. I definitely know way more about HTML and CSS now than when I started. Sadly, the layout still suffers from one of my personal pet peeves, which is that it's a fixed-width layout, but I'm starting to understand that it will take a significant amount of work to make that go away.
+
+I'm also starting to wonder if Jekyll is able to process php, so that I can set up comments. (And yes, I know that using ruby to process php is probably some sort of sin, but php is what I know).

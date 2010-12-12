@@ -2,6 +2,8 @@
 layout: post
 title: "So this is a blog..."
 excerpt: "Every once in a while, I think about starting a blog..."
+categories:
+- meta
 ---
 
 Every once in a while, I think "I might be able to write a blog post about this," and now that the quarter is over and I have a modicum of free time, I figure I'll set it up and see what I can do with it.
