@@ -58,16 +58,14 @@ h3 {
 #page-title {
    margin: 0;
    padding: 0;
-   text-indent: -5000em;
    background: url(/css/images/content_top.png) bottom left no-repeat;
-   display: block;
    width: 730px;
-   height: 35px;
+   height: 33px;
 }
 
 #content {
    width: 680px;
-   background: #ddd url(/css/images/post_grad.png) top left repeat-x;
+   background: #ddd;
    padding: 0 20px 20px;
    margin: 0 10px;
    float:left;
