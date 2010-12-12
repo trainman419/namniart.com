@@ -115,25 +115,19 @@ a.home:active {
    width: 730px;
    height: 22px; 
    text-align: left;
-   /*padding: 0px 30px;*/
-   padding-top: 10px;
-   padding-left: 20px;
-   padding-right: 30px;
-   padding-bottom: 0;
+   padding: 10px 20px 0px;
    margin-bottom: 0;
    font-size: 12px;
    color: #15482c;
 }
 
 #header a {
-   color: #15482c;
+   color: #8dc7a7;
    text-decoration: none;
-   padding-left: 5px;
-   padding-right: 5px;
 }
 
 #header a:hover {
-   color: #8dc7a7;
+   color: #15482c;
 }
 
 #header a:active {
@@ -146,18 +140,17 @@ a.home:active {
    margin: 0;
    background: transparent url(/css/images/content_bottom.png) top left no-repeat;
    text-align: right;
-   padding: 10px 30px 20px;
+   padding: 10px 20px;
    font-size: 12px;
 }
 
 #footer a {
-   color: #15482c;
+   color: #8dc7a7;
    text-decoration: none;
-   padding-left: 5px;
 }
 
 #footer a:hover {
-   color: #8dc7a7;
+   color: #15482c;
 }
 
 #footer a:active {
