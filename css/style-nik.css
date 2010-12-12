@@ -38,7 +38,7 @@ h2.title a:active {
 h3 {
    font-size: 18px;
    font-weight: normal;
-   text-decoration: underline;
+   text-decoration: none;
 }
 
 #content-wrapper {
@@ -53,14 +53,6 @@ h3 {
 
 #page-header a {
    text-decoration: none;
-}
-
-#page-title {
-   margin: 0;
-   padding: 0;
-   background: url(/css/images/content_top.png) bottom left no-repeat;
-   width: 730px;
-   height: 33px;
 }
 
 #content {
@@ -117,9 +109,41 @@ a.home:active {
    margin-left: -2px;
 }
 
+#header {
+   /* margin: 0; */
+   background: transparent url(/css/images/content_top.png) top left no-repeat;
+   width: 730px;
+   height: 22px; 
+   text-align: left;
+   /*padding: 0px 30px;*/
+   padding-top: 10px;
+   padding-left: 20px;
+   padding-right: 30px;
+   padding-bottom: 0;
+   margin-bottom: 0;
+   font-size: 12px;
+   color: #15482c;
+}
+
+#header a {
+   color: #15482c;
+   text-decoration: none;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+
+#header a:hover {
+   color: #8dc7a7;
+}
+
+#header a:active {
+   color: #000;
+}
+
 #footer {
    clear: both;
    color: #222222;
+   margin: 0;
    background: transparent url(/css/images/content_bottom.png) top left no-repeat;
    text-align: right;
    padding: 10px 30px 20px;
