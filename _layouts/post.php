@@ -17,14 +17,10 @@
         namniart
       </a>
     </h1>
-    <div id='header'>
-      <a href="/">Home</a> | 
-      <a href="/about.html">About</a> |
-      <a href="/projects.html">Projects</a>
-    </div>
+    <div id='page-title'></div>
 
     <div id='content'>
-      <h2>{{ page.date | date: site.datefmt }} - {{ page.title }}</h2>
+      <h2>{{ page.title }}</h2>
       {{ content }}
       <a class="home" href="/">Home</a>
     </div>
