@@ -20,5 +20,6 @@
     <div id='header'>
       <a href="/">Home</a> | 
       <a href="/about.html">About</a> |
-      <a href="/projects.html">Projects</a>
+      <a href="/projects.html">Projects</a> |
+      <a href="/categories.html">Posts by Category</a>
     </div>
