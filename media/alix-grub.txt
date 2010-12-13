@@ -1,0 +1,9 @@
+default=0
+timeout=2
+hiddenmenu
+serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1
+terminal --timeout=2 console serial
+
+title Gentoo
+    root (hd0,0)
+    kernel /boot/vmlinuz ro root=/dev/sda1 console=ttyS0,38400,8n1

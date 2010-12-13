@@ -1,0 +1,6 @@
+/dev/sda1	/		ext3	noatime,commit=15	1 1
+proc		/proc		proc		defaults			0 0
+sysfs	/sys		sysfs		defaults			0 0
+devpts	/dev/pts	devpts		mode=0622			0 0
+tmpfs	/tmp		tmpfs		mode=1777,size=40m		0 0
+shm	/dev/shm	tmpfs		nodev,nosuid,noexec		0 0
