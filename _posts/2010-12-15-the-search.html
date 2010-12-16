@@ -1,5 +1,5 @@
 ---
-format: post
+layout: post
 title: "Robot: The Search for a Brainstem"
 excerpt: "My search for a new brainstem to go with my new brain"
 categories:
@@ -7,25 +7,29 @@ categories:
 - senior project
 ---
 
+<p>
 And so, the search for a microcontroller to be the I/O controller for my robot begins.
 The current architecture uses two micros, an ATMega32 on a <a href="http://users.csc.calpoly.edu/~jseng/PolyBot_Board.html">Polybot Board 1.0</a> to monitor and control the steering and speed, and a Parallax Propeller on a <a href="http://www.parallax.com/Store/Microcontrollers/PropellerDevelopmentBoards/tabid/514/CategoryID/73/List/0/SortField/0/Level/a/ProductID/423/Default.aspx">Propeller Proto Board</a> to do most of the I/O to control and read the sensors.
 The Propeller board also communicates with a bluetooth serial module that sends all of the sensor data to an android phone, and which processes the data and sends back control commands. Unfortunately, the android phone was borrowed, for a <a href="">quarter project</a>, and I had to return it at the end of the quarter. Hence, a new brain and a search for a new brainstem.
+</p>
 
-I suppose introductions are in order.
+<p>I suppose introductions are in order.</p>
 
-The Robot:
+<p>The Robot:</p>
 <img src="/media/2010/12/15/robot.jpg"/>
 
-The Polybot Board:
+<p>The Polybot Board:</p>
 <img src="/media/2010/12/15/polybot.jpg"/>
 
-The Propeller Board, hidden behind all of the interconnect wiring:
+<p>The Propeller Board, hidden behind all of the interconnect wiring:</p>
 <img src="/media/2010/12/15/propeller.jpg"/>
 
-The glue logic, on a breadboard:
+<p>The glue logic, on a breadboard:</p>
 <img src="/media/2010/12/15/breadboard.jpg"/>
 
+<p>
 Since I'm adding yet another board to the robot, and it's already pretty crowded, I think it's time to consolidate the two microcontroller boards into one. Requirements for my ideal controller board are:
+</p>
 <ul>
 <li>1 analog input to sense battery voltage
 <li>5 digital outputs to trigger sonars
@@ -39,13 +43,16 @@ Since I'm adding yet another board to the robot, and it's already pretty crowded
    <li>Communication with the brain
    <li>Reading data from the GPS
    <li>Reading data from the sonars
-   <li>Sending and receiving data from a bluetooth serial module
+   <li>Sending and receiving data from a bluetooth serial module (optional)
    </ul>
 </ul>
 
+<p>
 This totals to 27 I/O pins, with at least 3 UARTS (ideally in hardware), an A/D converter, and possibly servo PWM hardware or timers. Finding a microcontroller with 3-4 hardware UARTS is tricky, and it makes the propeller an option.
+</p>
 
-Propeller Advantages:
+<h3><a href="http://www.parallax.com/Store/Microcontrollers/PropellerDevelopmentBoards/tabid/514/CategoryID/73/List/0/SortField/0/Level/a/ProductID/423/Default.aspx">Propeller</a></h3>
+Advantages:
 <ul>
 <li>8 cogs
 <li>4-uart module
@@ -61,10 +68,10 @@ Propeller Disadvantages:
 <li>C compiler is inefficient and unwieldy
 </ul>
 
-Polybot:
+<h3>Polybot</h3>
 As much as I love the AVR architecture, the Polybot board doesn't have enough UARTs to even talk to the brain and the sonars, so it's out.
 
-<a href="http://www.sparkfun.com/products/9546">Sparkfun XMega</a>
+<h3><a href="http://www.sparkfun.com/products/9546">Sparkfun XMega</a></h3>
 Advantages:
 <ul>
 <li>8! Hardware UARTs
@@ -82,7 +89,7 @@ Disadvantages:
 <li>Almost no on-board components; will probably need a support board with a crystal, voltage regulator, etc.
 </ul>
 
-<a href="http://www.sparkfun.com/products/9949">Arduino Mega 2560</a>
+<h3><a href="http://www.sparkfun.com/products/9949">Arduino Mega 2560</a></h3>
 Advantages:
 <ul>
 <li>4 Hardware UARTs
@@ -101,7 +108,7 @@ Disadvantages:
 <li>Big-ish, 2+" by 4.5"; still smaller than the brain
 </ul>
 
-Xilinx II Board
+<h3>Xilinx II Board</h3>
 Advantages:
 <ul>
 <li>Incredibly configurable and flexible
@@ -114,15 +121,21 @@ Disadvantages:
 <li>Windows-only software; no chance of escape
 </ul>
 
+<p>
 And with that analysis, I'm still a little torn. 
 The development environments for the Propeller board and the Xilinx board are both windows-based, which isn't something I want for a long-term project. With the Xilinx board, there's pretty much no chance that I'll be able to work with it from my linux machine. That leaves me with two choices:
+</p>
 
 <h3>A Second Look</h3>
 
 Arduino Mega:
+<p>
 The Arduino Mega is incredibly appealing, but it's still more new hardware to buy, which is a big disadvantage on my budget, but as long as I'm buying hardware I'd go for the better of the two.
+</p>
 
 Propeller:
+<p>
 With the propeller, there are development tools for linux, but they require a significant amount of learning, I'm still stuck with either Spin or assembly, and I'm not a big fan of Spin, and while assembly is fun, it's a bit too low-level for the programming I need to do. A C compiler for the propeller exists, but it requires an external memory to write anything much bigger than Hello World, and if I'm going to purchase something, I'd rather buy a complete board.
+</p>
 
-The jury's still out.
+<p>The jury's still out.</p>
