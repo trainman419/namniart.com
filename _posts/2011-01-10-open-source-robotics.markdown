@@ -8,7 +8,7 @@ categories:
 - open source
 ---
 
-As I continue to make slow, steady and relatively boring progress on the microcontroller firmware for my robot, it's time for me to start thinking about the software that will run on the main processor. Wikipedia has a good [list](http://en.wikipedia.org/wiki/Open-source_robotics) of the open-source robotics software that's out there, and I'm going to look more deeply at a few of the packages, in particular [ROS](http://www.ros.org/wiki/), [RoboComp](http://sourceforge.net/apps/mediawiki/robocomp/index.php?title=Main_Page), [Orca Robotics](http://orca-robotics.sourceforge.net/), and [The Orocos Project](http://www.orocos.org/orocos/whatis). The other packages weren't considered in depth, either because they're simulator packages, not suited to running a real robot, or they don't list support for my scanning laser range finder.
+As I continue to make slow, steady and relatively boring progress on the microcontroller firmware for my robot, it's time for me to start thinking about the software that will run on the main processor. Wikipedia has a good [list](http://en.wikipedia.org/wiki/Open-source_robotics) of the open-source robotics software that's out there, and I'm going to look more deeply at a few of the packages, in particular [ROS](http://www.ros.org/wiki/), [Orca Robotics](http://orca-robotics.sourceforge.net/), and [The Orocos Project](http://www.orocos.org/orocos/whatis). The other packages weren't considered in depth, either because they're simulator packages, not suited to running a real robot, or they don't list support for my scanning laser range finder.
 
 In particular, I'm looking for:
 * Camera and/or Kinect drivers
