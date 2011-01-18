@@ -1,0 +1,48 @@
+---
+layout: post
+title: "(Re)Assembly"
+excerpt: "Assembling the Robot from the ground up"
+categories:
+- robot
+---
+
+When I first assembled the robot, I was in a bit of a hurry to get it done before break was over, so I didn't take as many pictures as I should have of the assembly process. Tonight, as part of resolving another bug, I had to disassemble most of the robot, so I decided to do a little cleanup while I was at it and document the parts and the assembly procedure. So, here it is!
+
+All of the parts that are go into the center of the robot.
+![Parts](/media/2011/01/18/0.jpg)
+Parts, from top to bottom (mostly)
+* Center channel support
+* Support cross members
+* Compass and power distribution board
+* Main mounting plate
+* Alix.3D2 single-board computer
+* GPS module
+* Bluetooth module and bracket
+* Arduino Mega 2560
+
+The center channel of the robot, and all of the sensor distribution electronics that are normally hidden:
+![Center Channel](/media/2011/01/18/1.jpg)
+
+The center channel, ready to install the center channel bracket:
+![Center Channel](/media/2011/01/18/2.jpg)
+
+With the center channel bracket installed:
+![Bracket installed](/media/2011/01/18/3.jpg)
+
+Cross members installed
+![Cross mmebers](/media/2011/01/18/4.jpg)
+
+Computer and main mounting plate installed
+![Computer and mounting plate](/media/2011/01/18/5.jpg)
+
+Arduino and Bluetooth bracket installed
+![Arduino and Bluetooth](/media/2011/01/18/6.jpg)
+
+Compass and power distribution installed
+![Compass and power](/media/2011/01/18/7.jpg)
+
+Bluetooth module installed
+![Bluetooth](/media/2011/01/18/8.jpg)
+
+GPS installed. We're done!
+![Done](/media/2011/01/18/9.jpg)
