@@ -28,7 +28,7 @@ I've been working on the analysis of that data over the past few weeks, with int
 
 I've plotted all roughly 1800 GPS points gathered over that half-hour on google maps, and the results are quite a bit more scattered than I'd like.
 
-![GPS Points](/media/2011/03/01/gps-points.jpg)
+![Raw GPS Data](/media/2011/03/01/gps-data.jpg)
 
 I've also made a very rough plot of the points that are one standard deviation away from the mean in each direction.
 
