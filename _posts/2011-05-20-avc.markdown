@@ -1,0 +1,27 @@
+---
+layout: post
+title: "AVC Conclusion"
+excerpt: ""
+categories:
+- robot
+---
+
+A few weeks ago, I drove out to Colorado to compete in the [SparkFun Autonomous Vehicle Competition](http://www.sparkfun.com/news/526). They have a recap [here](http://www.sparkfun.com/news/612), but I thought I'd talk a bit about my experiences.
+
+![Snow!](/media/2011/05/20/snow.jpg)
+
+Firstly, a quick recap of my experiences on competition day. I was pretty surprised to see snow that morning. I was expecting rain later in the day, so I was prepared to waterproof my robot; I just had to do it a little sooner than I would have otherwise.
+
+![Waterproof](/media/2011/05/20/waterproof.jpg)
+
+For the first run of the day, the Xoom that I was using to control the robot was misbehaving due to the snow, and the robot took a wrong turn and ended up in the pond. I was able to pull it out almost immediately, so there wasn't any harm done.
+
+The second run was uneventful; something in the odometry was off, and I overshot the first turn and got stuck in some grass.
+
+![Stuck](/media/2011/05/20/run2.jpg)
+
+At the beginning of the third run, the robot was reporting incorrect position data, so I knew it probably wasn't going to do well. At the start, the robot cut across the paths of the other robots in my heat, and got clobbered by one of the other, slightly slower robots. Luckily, no harm done.
+
+Between races, I had time to watch and talk to the other competitors, including talking to the winning team about his strategies and code. His algorithms are pretty much identical to mine; his real key to success is lots and lots of tuning and testing. One of his key strategies appears to be offline tuning of his algorithm.
+
+Overall, I had a lot of fun, and made a few friends in the process.
