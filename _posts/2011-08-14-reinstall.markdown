@@ -3,7 +3,7 @@ layout: post
 title: "Reinstall"
 excerpt: "I've learned a few things; I think it's time to start fresh"
 categories:
-* robot
+- robot
 ---
 
 Since starting at Willow Garage, I've learned a number of things about ROS and about how to use it efficiently, so I'm going to start re-writing all of the software on my robot from scratch. A few things I've learned that make me think this is a good idea:
