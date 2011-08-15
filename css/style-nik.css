@@ -57,10 +57,11 @@ h3 {
 
 #content {
    width: 680px;
-   background: #ddd;
+   background: #e0e0e0;
    padding: 0 20px 20px;
    margin: 0 10px;
    float:left;
+   line-height: 140%;
 }
 
 .posts {

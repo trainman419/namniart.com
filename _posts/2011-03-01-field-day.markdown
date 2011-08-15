@@ -1,0 +1,37 @@
+---
+layout: post
+title: "Field Day and other progress"
+excerpt: "A few days of field testing and data analysis"
+categories:
+- robot
+---
+
+Now that my hardware is complete, and I have enough software to get data from my sensors and log it, it's time to start field testing the robot.
+
+On Saturday 2/19 I was at the very awesome [Super Happy Dev House](http://superhappydevhouse.org/) #42, where I had a chance to do some data structure design, and to show off the robot a bit.
+
+The following Monday, I was ready for field-testing! I grabbed my robot, a few things that would be helpful, and sat down on Dexter Lawn to collect GPS data so that I can characterize the noise in my GPS readings. This mostly involved me sitting in one place and watching the GPS log.
+
+![On Dexter Lawn](/media/2011/03/01/dexter.jpg)
+
+![On Dexter Lawn](/media/2011/03/01/dexter2.jpg)
+
+I was noticing an unusual amount of what appeared to be line noise and corruption in my incoming GPS data, so I investigated the software for a while before deciding that it was probably a hardware problem and heading for one of the electrical engineering labs where I could use an osiclloscope. 3 hours later, I found my problem: an uninitialized variable in my data-parsing code. oops.
+
+I headed up to the UU plaza for more testing, and took the opportunity and the flat space to play with the robot and drive it around a bit, testing cornering and full speed. I've concluded that my speed control still needs some work, but it corners vary well.
+
+Since GPS was working now too, I sat down and spent about 30 minutes gathering GPS data.
+
+![In UU Plaza](/media/2011/03/01/uu.jpg)
+
+I've been working on the analysis of that data over the past few weeks, with interesting results. Firstly, I've been using it to test my map models, as a verification that my data is correct, that I can correctly interpret the data, and that my map models are working properly.
+
+I've plotted all roughly 1800 GPS points gathered over that half-hour on google maps, and the results are quite a bit more scattered than I'd like.
+
+![Raw GPS Data](/media/2011/03/01/gps-data.jpg)
+
+I've also made a very rough plot of the points that are one standard deviation away from the mean in each direction.
+
+![GPS Mean](/media/2011/03/01/gps-mean.jpg)
+
+The next step on this is to do some analysis of various-sized samples of the data, to determine how many data points I need and what final accuracy I can expect from them.
