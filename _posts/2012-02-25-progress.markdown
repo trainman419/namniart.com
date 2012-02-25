@@ -1,0 +1,48 @@
+---
+layout: post
+title: "Robot Progress"
+excerpt: "I've been busy"
+categories:
+- robot
+---
+
+I've made a lot of incremental progress on my robot over the past few months. A lot of it deserves its own blog post; I'll try to summarize things here, and then follow up with more detailed posts as appropriate.
+
+First: the robot has a name: Dagny. Well, its had a name for a while, but it's finally on the robot:
+
+TODO: picture of one of the front fenders.
+
+On the software side of things, I've significantly improved my integration with ROS. Where I was previously only using ROS as a message-passing architecture, I'm now working on integrating properly with the ROS navigation stack by publishing and subscribing to the appropriate topics as discussed in the navigation tutotials (TODO: link).
+
+I've also written a proper URDF (TODO: link) for my robot, which means that I can effectively transform all of my sensor data into the frame of the robot for free, and I also get much better sensor visualization tools with very little extra work. Now I can visualize all of my sensor data with rviz! (TODO: link)
+
+(TODO: screencap of rviz)
+
+I've made a lot of progress on the firmware as well. Architecturally, I'm doing more processing on the arduino, such as GPS parsing and odometry calculations. reviously, I was passing raw NMEA strings up to the main processor, which were sent over a named pipe to gpsd and then returned as ROS messages via the gpsd_client node._ With the GPS parsing on the arduino, the system has fewer steps, isn't as brittle as coordinating a system daemon with ROS, and there's less data travelling over my serial link.
+
+I also finally have my sonar sensors running again, and I'm publishing sonar data as ROS messages.
+
+I spent some time dabbling with using rosserial (TODO: link) for my serial protocol, but all of the hacks that I had to do to get rosserial to run on top of my custom firmware resulted in a system that would only run for 10-15 minutes before crashing for reasons that I still don't understand. The experience of running rosserial did teach help me come up with a better firmware architecture, and I found a couple of long-standing bugs in my libraries along the way.
+
+With all of the software improvements, I've upgraded my sensor suite as well. I've upgraded my GPS to Sparkfun's latest Venus GPS (TODO: link), and I've upgraded my 2-axis compass to a 9-axis IMU from Sparkfun (TODO: link), which includes a 3-axis gyroscope, 3-axis accelerometer and a 3-axis magnetometer.
+
+(TODO: picture; new sensor suite)
+
+And to support all of the new software and running the ROS navigation stack on my robot, I've upgraded the main processor from my old 500MHz Geode to a Pandaboard. (TODO: link). It's a dual-core 1GHz ARM processor with 1GB of memory. The extra processing power and memory makes it much easier to run the navigation stack, and I think I still have some extra CPU power left over to do other inetresting things.
+
+The next things to do are:
+ * Restore the android in the firmware, so that I can get my safety lockouts and RC control back
+ * Update the IMU drivers so that the axes are aligned properly with the robot
+ * Update the IMU drivers so that the gyro, compass and accelerometer are scaled properly.
+ * Use the accelerometer to tilt-compensate the compass
+ * Write a sensor filtering/fusion algorithm to combine the odometry and IMU data into a more accurate position estimate
+
+Once I have all of these basics working, I'll be focusing on high-level code to allow me to compete in RoboMagellan at RoboGames (TODO: link), and the Sparkfun AVC (TODO: link)
+
+Upcoming posts may cover: (this is my idea backlog at this point)
+ * Using the ROS navigation stack on an ackermann-style robot
+ * Using sonar sensors with the ROS navigation stack
+ * Tilt-compensated compasses and sensor fusion
+ * Experiences with rosserial
+ * Expereinces with ROS on the Pandaboard
+ * Outdoor navigation with ROS
