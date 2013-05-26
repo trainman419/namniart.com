@@ -1,9 +1,5 @@
-auto: false
-server: false
-server_port: 3000
-
 pygments: true
 
 datefmt: "%b %d, %Y"
 
-exclude: README.txt
+#exclude: README.txt
