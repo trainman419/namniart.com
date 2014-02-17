@@ -12,7 +12,7 @@ I've spent the last few months experimenting with path planning for Dagny.
 
 Dagny is an car-type robot, which means that I have a very constrained set of possible motions. In particular, I can move forwards and backwards, and can turn while moving, but can't turn in place or move sideways. If you've ever driven a car and tried to parallel park, you can understand how difficult it can be to maneuver a car-type vehicle.
 
-![Parking](TODO "image of parallel parking")
+![Parking](/media/2014/02/16/parallel.jpg)
 
 These motion constraints mean that I have to make sure that the motion planners understand the motion constraints and can generate a path that doesn't have turn-in-place behaviors, and honors the minimum turning radius of the robot.
 
@@ -105,9 +105,17 @@ Since we can't solve directly for the path parameters, we cheat and run a numeri
 
 The current solution simply searches for all primitives whose end point is within one minimum turning radius of the robot's start position. This produces a significant number of overlapping primitives:
 
-![Motion Primitives](mprim_0.png)
+![Motion Primitives](/media/2014/02/16/mprim_0.png "Paths with starting angle 0")
 
-![Motion Primitives](mprim_1.png)
+Paths with starting angle 0
+
+![Motion Primitives](/media/2014/02/16/mprim_1.png "Paths with starting angle 1")
+
+Paths with starting angle 1
+
+![Motion Primitives](/media/2014/02/16/mprim_2.png "Paths with starting angle 2")
+
+Paths with starting angle 2
 
 The next steps here are to:
  * Find a solution for eliminating redundant motion primitives
