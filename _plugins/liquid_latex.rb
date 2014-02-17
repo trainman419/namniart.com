@@ -10,9 +10,9 @@ module Jekyll
         "debug" => false,
         "density" => "300",
         "usepackages" => "",
-        "latex_cmd" => "latex -interaction=nonstopmode $texfile &> /dev/null",
-        "dvips_cmd" => "dvips -E $dvifile -o $epsfile &> /dev/null",
-        "convert_cmd" => "convert -density $density $epsfile $pngfile &> /dev/null",
+        "latex_cmd" => "latex -interaction=nonstopmode $texfile > /dev/null 2>&1",
+        "dvips_cmd" => "dvips -E $dvifile -o $epsfile > /dev/null 2>&1",
+        "convert_cmd" => "convert -density $density $epsfile $pngfile > /dev/null 2>&1",
         "temp_filename" => "latex_temp",
         "output_directory" => "/latex",
         "src_dir" => "",
@@ -105,10 +105,11 @@ module Jekyll
           tex_file.close
           # Compile the document to PNG
           ok = execute_cmd(@@globals["latex_cmd"])
-          execute_cmd(@@globals["dvips_cmd"]) if ok
-          execute_cmd(@@globals["convert_cmd"]) if ok
+          ok = execute_cmd(@@globals["dvips_cmd"]) if ok
+          ok = execute_cmd(@@globals["convert_cmd"]) if ok
           # Delete temporary files
           Dir.glob(@@globals["temp_filename"] + ".*").each do |f|
+            puts "Delete temporary file " + f if @@globals["debug"]
             File.delete(f)
           end
         end
