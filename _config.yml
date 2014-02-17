@@ -3,3 +3,6 @@ pygments: true
 datefmt: "%b %d, %Y"
 
 #exclude: README.txt
+
+liquid_latex:
+  usepackages: mathtools
