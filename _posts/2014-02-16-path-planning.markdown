@@ -16,11 +16,11 @@ Dagny is an car-type robot, which means that I have a very constrained set of po
 
 These motion constraints mean that I have to make sure that the motion planners understand the motion constraints and can generate a path that doesn't have turn-in-place behaviors, and honors the minimum turning radius of the robot.
 
-The overall plan to achieve this is to use the ROS navigation stack with the sbpl\_lattice\_planner, custom motion primitives and a custom local planner.
+The overall plan to achieve this is to use the [ROS navigation stack](http://wiki.ros.org/navigation) with the [sbpl\_lattice\_planner](http://wiki.ros.org/sbpl_lattice_planner) as the global planner with custom motion primitives and a custom local planner.
 
 ## SBPL
 
-SBPL is the Search-Based Planning Lab, and the publish a set of planning libraries called lattice planners that discretize the state space, and define motions that connect one point and angle on the grid to another grid point. These motions are usually either a straight line, or a combination of a straight line and an arc, to achieve both the desired linear and angular offset between poses. Once the motion primitives are defined, they form a graph that can be searched with an algorithm such as A\* to produce the desired path.
+[SBPL](http://sbpl.net/) is the Search-Based Planning Lab, and they publish a set of planning libraries called lattice planners that discretize the state space, and define motions that connect one point and angle on the grid to another grid point. These motions are usually either a straight line, or a combination of a straight line and an arc, to achieve both the desired linear and angular offset between poses. Once the motion primitives are defined, they form a graph that can be searched with an algorithm such as A\* to produce the desired path.
 
 Since the motion primitives define the search space and how the robot moves, having a good set of motion primitives is critical to producing good plans.
 
@@ -92,7 +92,7 @@ wl^2/ 2 + \omega_{0} l + \theta_{0}
 
 <!-- ___ -->
 
-The solution to these equations is left as an exercise to the reader. It is sufficient to note that while the equations for the linear and arc segments are closed-form and invertable, the equations for the arc are not invertable.
+The solution to these equations is left as an exercise to the reader. It is sufficient to note that while the equations for the linear and arc segments are closed-form and invertable, the equations for the spiral are neither.
 
 By combining a spiral, an arc, and a second spiral the same length as the first, we can create a path that results in a net angular change, but starts and ends with zero angular velocity. By combining two of these with opposing curvatures, we can create a smooth path that has an offset in both X and Y, but zero angular offset, and zero angular velocity at the start and end points.
 
@@ -117,7 +117,7 @@ Paths with starting angle 1
 
 Paths with starting angle 2
 
-The next steps here are to:
+My next steps will be to:
  * Find a solution for eliminating redundant motion primitives
  * Evaluate the coverage or effectiveness of the resulting primitives
  * Test out these motion primitives in simulation and on a real robot
