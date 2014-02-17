@@ -1,5 +1,5 @@
 ---
-layout: pose
+layout: post
 title: "Path Planning for Dagny"
 excerpt: Path planning for cars is hard
 categories:
@@ -33,9 +33,10 @@ My strategy for generating motion primitives revolves around building primitives
 
 Since Dagny's dynamics allow me to execute any turn at any speed, I can ignore linear velocity and acceleration in my models. Therefore, for the sake of simplicity, I generate all of my motion primitives assuming a constant linear velocity of 1m/s.
 
-A linear segment is defined simply by:
+A linear segment of length {% latex %}\[l\]{% endlatex %} is defined simply by:
 
 {% latex %}
+\[
 \begin{bmatrix}
 x \\
 y \\
@@ -43,12 +44,72 @@ y \\
 \end{bmatrix}
 =
 \begin{bmatrix}
-t * cos(\theta) + x_{0} \\
-t * sin(\theta) + x_{0} \\
+l * cos(\theta_{0}) + x_{0} \\
+l * sin(\theta_{0}) + y_{0} \\
 \theta_{0}
 \end{bmatrix}
-
+\]
 {% endlatex %}
 
 
+An arc segment of length {% latex %}\[l\]{% endlatex %} with angular velocity {% latex %}\[\omega\]{% endlatex %} is defined by:
 
+{% latex %}
+\[
+\begin{bmatrix}
+x \\
+y \\
+\theta
+\end{bmatrix}
+=
+\begin{bmatrix}
+\int_0^l cos(\omega t + \theta_{0})\,\mathrm{d}t \\
+\int_0^l sin(\omega t + \theta_{0})\,\mathrm{d}t \\
+\omega l + \theta_{0}
+\end{bmatrix}
+\]
+
+{% endlatex %}
+
+More intersetingly, a spiral segment of length {% latex %}\[l\]{% endlatex %} with initial angular velocity {% latex %}\[\omega_{0}\]{% endlatex %} and angular acceleration {% latex %}\[w\]{% endlatex %} is defined by:
+
+{% latex %}
+\[
+\begin{bmatrix}
+x \\
+y \\
+\theta
+\end{bmatrix}
+=
+\begin{bmatrix}
+\int_0^l cos(wt^2/ 2 + \omega_{0} t + \theta_{0})\,\mathrm{d}t \\
+\int_0^l sin(wt^2/ 2 + \omega_{0} t + \theta_{0})\,\mathrm{d}t \\
+wl^2/ 2 + \omega_{0} l + \theta_{0}
+\end{bmatrix}
+\]
+
+{% endlatex %}
+
+<!-- ___ -->
+
+The solution to these equations is left as an exercise to the reader. It is sufficient to note that while the equations for the linear and arc segments are closed-form and invertable, the equations for the arc are not invertable.
+
+By combining a spiral, an arc, and a second spiral the same length as the first, we can create a path that results in a net angular change, but starts and ends with zero angular velocity. By combining two of these with opposing curvatures, we can create a smooth path that has an offset in both X and Y, but zero angular offset, and zero angular velocity at the start and end points.
+
+By using these two path constructs to create primitives, we can guarantee that the meeting points between primitives always have zero angular velocity. This alllows us to describe the search lattice with only 3 variables (x, y and yaw), while still guaranteeing path smoothness. This should reduce the search time significantly compared to a planner that considers angular velocity as part of the search space.
+
+
+To generate smooth primitives, we paremeterize our path on the length and angular acceleration of the first spiral, and the length of the first arc. Given the symmetry of the paths we're generating, this is sufficient to completely describe the path.
+
+Since we can't solve directly for the path parameters, we cheat and run a numeric optimization to find parameters that produce each primitive.
+
+The current solution simply searches for all primitives whose end point is within one minimum turning radius of the robot's start position. This produces a significant number of overlapping primitives:
+
+![Motion Primitives](mprim_0.png)
+
+![Motion Primitives](mprim_1.png)
+
+The next steps here are to:
+ * Find a solution for eliminating redundant motion primitives
+ * Evaluate the coverage or effectiveness of the resulting primitives
+ * Test out these motion primitives in simulation and on a real robot
