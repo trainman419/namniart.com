@@ -13,10 +13,11 @@ California Polytechnic University, San Luis Obispo, CA
 B.S. Computer Engineering, June 2011
  
 ## Skills
-*Programming Languages*: C, C++, Java, Python and Perl  
-*Frameworks*: ROS, CMake  
-*Programming Experience*: Bash, HTML, Javascript, Tex and Postscript  
-*Operating Systems*: Windows, Mac OS X, Linux and embedded systems
+*Languages (in order of porficiency)*: C, C++, Java, Python, Perl, Bash, HTML, Javascript, LaTeX and Postscript  
+*Frameworks*: ROS, OpenCV  
+*Tools*: CMake, Jenkins, Solidworks  
+*Operating Systems*: Windows, Mac OS X, Linux  
+*Microncontrollers*: AVR, ARM
 
    
 ## Work Experience

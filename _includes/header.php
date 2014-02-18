@@ -20,6 +20,7 @@
     <div id='header'>
       <a href="/">Home</a> | 
       <a href="/about.html">About</a> |
+      <a href="/resume.html">Resume</a> |
       <a href="/projects.html">Projects</a> |
       <a href="/categories.html">Posts by Category</a> |
       <a href="/feed.xml">RSS</a>
