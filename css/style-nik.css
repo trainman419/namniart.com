@@ -41,6 +41,10 @@ h3 {
    text-decoration: none;
 }
 
+figure {
+   text-align: center
+}
+
 #content-wrapper {
    width: 740px;
    margin: 0 auto;
