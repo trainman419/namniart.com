@@ -21,12 +21,10 @@ I then installed them by hand with `dpkg -i *.deb`
 
 Since the 3.2.0 kernel is an older version than what normally ships with Ubuntu Raring, I had to do some convincing to get the Ubuntu tools to installer the earlier kernel. I moved the newer kernels out of `/boot` and then invoked `flash-kernel` to install the desired kernel into the boot partition:
 
-```
-cd /boot
-sudo mkdir old
-sudo mv -i vmlinux-3.5* old/
-sudo flash-kernel 3.2.0-1444-omap4
-```
+    cd /boot
+    sudo mkdir old
+    sudo mv -i vmlinux-3.5* old/
+    sudo flash-kernel 3.2.0-1444-omap4
 
 ## Notes and deviations
 
