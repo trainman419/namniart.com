@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Installing ROS on the NVIDIA Jetson TK1"
+title: "Installing ROS on the Jetson TK1"
 excerpt: First look at ROS on the NVIDIA Jetson TK1
 categories:
 - Jetson-TK1
