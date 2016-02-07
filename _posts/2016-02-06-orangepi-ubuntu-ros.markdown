@@ -55,11 +55,11 @@ If your network needs a passphrase, generate the hash for it using `wpa_passphra
 
 Then set up your `/etc/network/interfaces` to auto-join the network:
 
-`auto wlan1
-iface wlan1 inet dhcp
-  pre-up rfkill unblock 1
-  wpa-ssid Robonet
-  wpa-psk KEYKEYKEY # replace with the key from wpa_passphrase`
+    auto wlan1
+    iface wlan1 inet dhcp
+      pre-up rfkill unblock 1
+      wpa-ssid Robonet
+      wpa-psk KEYKEYKEY # replace with the key from wpa\_passphrase
 
 And finally reboot to activate the new wifi configuration.
  (if you don't feel like rebooting, you can restart network-manager and do `ifup wlan1`)
