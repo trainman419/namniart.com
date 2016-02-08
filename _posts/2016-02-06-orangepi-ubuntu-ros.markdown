@@ -59,7 +59,7 @@ Then set up your `/etc/network/interfaces` to auto-join the network:
     iface wlan1 inet dhcp
       pre-up rfkill unblock 1
       wpa-ssid Robonet
-      wpa-psk KEYKEYKEY # replace with the key from wpa\_passphrase
+      wpa-psk KEYKEYKEY # replace with the key from wpa_passphrase
 
 And finally reboot to activate the new wifi configuration.
  (if you don't feel like rebooting, you can restart network-manager and do `ifup wlan1`)
