@@ -4,6 +4,7 @@ title: "AVC Conclusion"
 excerpt: ""
 categories:
 - robot
+- AVC
 ---
 
 A few weeks ago, I drove out to Colorado to compete in the [SparkFun Autonomous Vehicle Competition](http://www.sparkfun.com/news/526). They have a recap [here](http://www.sparkfun.com/news/612), but I thought I'd talk a bit about my experiences.
