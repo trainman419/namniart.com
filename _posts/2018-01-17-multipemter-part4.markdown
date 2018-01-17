@@ -23,10 +23,10 @@ Based on the study of existing ADC designs that I did last time, I think I'm loo
 
 I've started with a few basic search options:
 
-  * In Stock and Normally stocking, because I want to pick parts that are readily available, and I want to choose something that will still be in stock in a few weeks or months when I finish up enough of the design details to order parts.
-  * RoHS Compliant (controlled levels of harmful substances) because I want to choose parts that won't further harm the environment (almost all parts are RoHS compliant, so this doesn't limit the selection much)
-  * Part Status: Active. This describes the manufacturer's production status, and Active parts are ones that are still being manufactured. I don't expect to need anything cutting-edge, so I won't choose Preliminary here.
-  * Number of Bits: 12,16 , and all options 16 and higher. All I want to do with this filter is filter out the parts that absolutely don't have enough resolution. I can come back later and filter this more.
+ * In Stock and Normally stocking, because I want to pick parts that are readily available, and I want to choose something that will still be in stock in a few weeks or months when I finish up enough of the design details to order parts.
+ * RoHS Compliant (controlled levels of harmful substances) because I want to choose parts that won't further harm the environment (almost all parts are RoHS compliant, so this doesn't limit the selection much)
+ * Part Status: Active. This describes the manufacturer's production status, and Active parts are ones that are still being manufactured. I don't expect to need anything cutting-edge, so I won't choose Preliminary here.
+ * Number of Bits: 12,16 , and all options 16 and higher. All I want to do with this filter is filter out the parts that absolutely don't have enough resolution. I can come back later and filter this more.
 
 That still leaves 1900 parts, so I'm going to scroll through the remaining categories to try to narrow down my search a bit more.
 
