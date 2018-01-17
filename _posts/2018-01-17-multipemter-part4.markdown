@@ -19,9 +19,9 @@ Based on the study of existing ADC designs that I did last time, I think I'm loo
 
  I'm going to start my search in DigiKey's [Data Acquisition - Analog to Digital Converters (ADC)](https://www.digikey.com/products/en/integrated-circuits-ics/data-acquisition-analog-to-digital-converters-adc/700) category.
 
- ![Initial ADC Search](/media/2018/01/14/digikey_search_1.png)
+[![Initial ADC Search](/media/2018/01/14/digikey_search_1_thumb.png)](/media/2018/01/14/digikey_search_1.png)
 
- I've started with a few basic search options:
+I've started with a few basic search options:
 
   * In Stock and Normally stocking, because I want to pick parts that are readily available, and I want to choose something that will still be in stock in a few weeks or months when I finish up enough of the design details to order parts.
   * RoHS Compliant (controlled levels of harmful substances) because I want to choose parts that won't further harm the environment (almost all parts are RoHS compliant, so this doesn't limit the selection much)
@@ -30,7 +30,7 @@ Based on the study of existing ADC designs that I did last time, I think I'm loo
 
 That still leaves 1900 parts, so I'm going to scroll through the remaining categories to try to narrow down my search a bit more.
 
-![Narrowing By Reference](/media/2018/01/14/digikey_search_1.png)
+[![Narrowing By Reference](/media/2018/01/14/digikey_search_2_thumb.png)](/media/2018/01/14/digikey_search_2.png)
 
 One of the options is Voltage Refence, and I'm pretty sure I want an ADC with an external reference, so I'm going to select all of the options that include External. (presumably the ADCs that list multiple options are configurable, but if they're not I can always narrow the search further).
 
