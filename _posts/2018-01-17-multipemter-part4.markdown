@@ -45,7 +45,7 @@ I suspect it's possible to design the analog stage in a way that scales or shift
 I did a bit more searching and found a more modern multimeter refence design based on the TI MSP430, the [TIDA-00879](http://www.ti.com/tool/TIDA-00879). This design has a number of key specifications that make it very interesting for me:
  * Based on a Microcontroller (the TI MSP430)
  * Automatic range selection
- * 4.5 digit, 60,000 count design, which is more accurate than my eventual target.
+ * 4 1/2 digit, 60,000 count design, which is more accurate than my eventual target.
  * Single-ended supply voltage
  * 60mV to 60V and 600uA to 60mA current ranges
  * Range selection appears to be electronic, not relay-based
