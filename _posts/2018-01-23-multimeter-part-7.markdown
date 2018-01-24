@@ -25,7 +25,7 @@ The first obvious thing to reconsider is the input impedance; selecting a 1M inp
 
 It seems like either I'm making some fundamental error in choosing this resistor, or it's just that much more expensive than I was expecting. EEVblog has [a nice review](https://www.eevblog.com/forum/blog/eevblog-373-multimeter-input-protection-tutorial/)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zUhnGp5vh60" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zUhnGp5vh60" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
 
 The biggest takeaway here seems to be that even the professional multimeters are using the more expensive, precision resistors for their input protection.
 
