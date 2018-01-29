@@ -40,7 +40,7 @@ I can also estimate the JFET current and clamping voltage by modeling the JFET t
 
 ## Op-Amp Selection
 
-Given the ~1pA leakage current requirement and 1uV resolution on the input, I need a low-leakage, low-offset precision op-amp for the input. Again, The Are of Electronics has a lot of great suggestions here, and after reviewing their table of precision op-amps I selected the ... since it looks like it has a good balance of maximum leakage (~1pA) and offset (~???). This op-amp doesn't have particularly high bandwidth or slew rate, but it's only driving the high-impedance load of the MSP430's ADC, and the expected sampling rate is low, so I'm not too worried about the low bandwidth.
+Given the ~1pA leakage current requirement and 1uV resolution on the input, I need a low-leakage, low-offset precision op-amp for the input. Again, The Are of Electronics has a lot of great suggestions here, and after reviewing their table of precision op-amps I selected the LTC6078 since it looks like it has a good balance of maximum leakage (~1pA) and offset voltage (~25uV). This op-amp doesn't have particularly high bandwidth or slew rate, but it's only driving the high-impedance load of the MSP430's ADC, and the expected sampling rate is low, so I'm not too worried about the low bandwidth.
 
 Similar to the TI reference design, I'm using these op-amps as unity gain buffers on the voltage and current stages, and I'm also using one to generate the mid-supply bias voltage for the common probe input.
 
