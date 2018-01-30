@@ -38,12 +38,12 @@ Here's how a few reference designs handle this:
 
  Fluke's design seems to be the only one that is close to what I'm designing and which has circuit protection, and it suggests two different protection methods depending on the current range: fuses for higher-current ranges, and fuses (or maybe a PTC) combined with shunt diodes for lower current ranges. The effectiveness of the diode shunt and therefore the current ranges that it should be applied to are limited by the current through the sense resistor at the clamp voltage, so I'll compute that for my four sense resistances:
 
- | Range | R(sense) | Current at 0.7V | Power at 0.7V | Current at 200V (no diode shunt) | Power at 200V (no diode shunt) |
- |-------|----------|-----------------|---------------|----------------------------------|--------------------------------|
- | 10A   | 1.5m Ohm | 467A            | 327W          | 133k A                           | 26.7 MW  (kaboom!)             |
- | 100mA | 150m Ohm | 4.6A            | 3.3W          | 1.3k A                           | 267 kW   (pop!)                |
- | 1mA   | 15 Ohm   | 46mA            | 32mW          | 13.3 A                           | 2.6 kW                         |
- | 10uA  | 1.5k Ohm | 0.46mA          | 0.32mW        | 133 mA                           | 26.7 W                         |
+| Range | R(sense) | Current at 0.7V | Power at 0.7V | Current at 200V (no diode shunt) | Power at 200V (no diode shunt) |
+|-------|----------|-----------------|---------------|----------------------------------|--------------------------------|
+| 10A   | 1.5m Ohm | 467A            | 327W          | 133k A                           | 26.7 MW  (kaboom!)             |
+| 100mA | 150m Ohm | 4.6A            | 3.3W          | 1.3k A                           | 267 kW   (pop!)                |
+| 1mA   | 15 Ohm   | 46mA            | 32mW          | 13.3 A                           | 2.6 kW                         |
+| 10uA  | 1.5k Ohm | 0.46mA          | 0.32mW        | 133 mA                           | 26.7 W                         |
 
  Clearly, trying to use a diode shunt around the 1.5m Ohm resisor won't prevent its destruction. The 150m Ohm resistor that I've chosen has a continuous power rating of 1W, but from the datasheet it looks like it will survive this kind of overcurrent for 5 seconds. The current and power in the 15 Ohm and 1.5k Ohm resistors is well below their limits. The current and power through all of these resistors at line voltage is clearly destructive, so it seems obvious that all of them need some form of overcurrent protection.
 
