@@ -38,11 +38,35 @@ Here's how a few reference designs handle this:
 
  Fluke's design seems to be the only one that is close to what I'm designing and which has circuit protection, and it suggests two different protection methods depending on the current range: fuses for higher-current ranges, and fuses (or maybe a PTC) combined with shunt diodes for lower current ranges. The effectiveness of the diode shunt and therefore the current ranges that it should be applied to are limited by the current through the sense resistor at the clamp voltage, so I'll compute that for my four sense resistances:
 
- | R(sense) | Current at 0.7V | Power at 0.7V | Current at 200V (no diode shunt) | Power at 200V (no diode shunt) |
- |----------|-----------------|---------------|----------------------------------|--------------------------------|
- | 1.5m Ohm | 467A            | 327W          | 133k A                           | 26.7 MW  (kaboom!)             |
- | 150m Ohm | 4.6A            | 3.3W          | 1.3k A                           | 267 kW   (pop!)                |
- | 15 Ohm   | 46mA            | 32mW          | 13.3 A                           | 2.6 kW                         |
- | 1.5k Ohm | 0.46mA          | 0.32mW        | 133 mA                           | 26.7 W                         |
+ | Range | R(sense) | Current at 0.7V | Power at 0.7V | Current at 200V (no diode shunt) | Power at 200V (no diode shunt) |
+ |-------|----------|-----------------|---------------|----------------------------------|--------------------------------|
+ | 10A   | 1.5m Ohm | 467A            | 327W          | 133k A                           | 26.7 MW  (kaboom!)             |
+ | 100mA | 150m Ohm | 4.6A            | 3.3W          | 1.3k A                           | 267 kW   (pop!)                |
+ | 1mA   | 15 Ohm   | 46mA            | 32mW          | 13.3 A                           | 2.6 kW                         |
+ | 10uA  | 1.5k Ohm | 0.46mA          | 0.32mW        | 133 mA                           | 26.7 W                         |
 
  Clearly, trying to use a diode shunt around the 1.5m Ohm resisor won't prevent its destruction. The 150m Ohm resistor that I've chosen has a continuous power rating of 1W, but from the datasheet it looks like it will survive this kind of overcurrent for 5 seconds. The current and power in the 15 Ohm and 1.5k Ohm resistors is well below their limits. The current and power through all of these resistors at line voltage is clearly destructive, so it seems obvious that all of them need some form of overcurrent protection.
+
+Browsing over PTCs on DigiKey, I don't see any PTCs with a combined 10A, 200V rating, so it looks like I'll need a traditional fuse there.
+
+Given that the 15 Ohm and 1.5k Ohm resistors probably won't blow a 10A fuse at short circuit (fuses require some overcurrent before they open). At slightly lower voltages, the 15 Ohm resistor could carry 10A (and disspate 1500 watts!) without blowing the fuse, so the lower current ranges definitely need an alternate, lower-current protection. DigiKey has a number of PTCs with ratings above 200V and 1mA (often much above 1mA).
+
+PTCs have specifications for holding and trip currents, and a trip current time that specifies how long it takes to open at the trip current. These specifications seem to have quite a spread of values across different parts, but they only seem to be available in limited combinations, so it seems like the most appropriate way to proceed here is to choose a PTC that is close to the correct specification and then design the rest of the circuit around that component.
+
+With that in mind, the following components look good:
+
+| Part | Hold Current (mA) | Trip Current (mA) | Nominal Resistance (Ohms) | Trip Time |
+|------|-------------------|-------------------|---------------------------|-----------|
+| [Bourns CMF-RL55A-0](https://www.digikey.com/product-detail/en/bourns-inc/CMF-RL55A-0/CMF-RL55A-0-ND/1679670)            | 50mA | 100mA | 55Ω | 100mS |
+| [Bourns CMF-RL50A-0](https://www.digikey.com/product-detail/en/bourns-inc/CMF-RL50A-0/CMF-RL50A-0-ND/1679669)            | 50mA | 100mA | 50Ω | 100mS |
+| [Bourns CMF-RL35-0](https://www.digikey.com/product-detail/en/bourns-inc/CMF-RL35-0/CMF-RL35-0-ND/1679668)               | 75mA | 150mA | 35Ω | 150mS |
+| [Bel Fuse 0ZRE0005FF1C](https://www.digikey.com/product-detail/en/bel-fuse-inc/0ZRE0005FF1C/507-1348-ND/1560203)         | 50mA | 120mA | 18.5Ω | 15s |
+| [Littelfuse LVR005NS](https://www.digikey.com/product-detail/en/littelfuse-inc/LVR005NS/LVR005NS-ND/1853845)             | 50mA | 120mA | 18.5Ω | 10s |
+| [Bourns MF-RM005/240-2](https://www.digikey.com/product-detail/en/bourns-inc/MF-RM005-240-2/MF-RM005-240-2CT-ND/3594925) | 50mA | 120mA | 18.5Ω | 10s |
+| [EPCOS B59907A0120A062](https://www.digikey.com/product-detail/en/epcos-tdk/B59907A0120A062/495-75886-1-ND/7086954)      | 12mA | 22mA | 640Ω | ~1s |
+
+Given the 15 Ohm resistance of the 1mA sense resistor, the PTCs with higher resistance would cause a significant additional voltage drop (particularly the 55Ω and 640Ω components). Even though the PTCs with lower resistances have significantly higher current ratings, I think they're the correct choice for this circuit, and combined with a clamp diode they should still provide adequate protection for the sense resistor and the op-amp input stage.
+
+Within the remaining components, it looks like there are three that meet similar specs (50mA current, 18.5Ω, 10 second) and two others with similar, higher resistances and faster trip times (50mA, 50Ω, 100mS). Looking closer, the three low-resistance parts all have maximum currents of 1A, but with a resistance of about 18.5 Ohms at 200V, the expected current is a little over 10A, which is well above the PTC's rating. The higher resistance devices all have maximum currents of 3A and a resitance of about 50 Ohms, which equates to a 4A current. In either case it looks like I'll have to take additional steps to limit the short-circuit current through the PTC if I want to use one of these.
+
+I'm going to sleep on this and try to draw up some candidate circuit diagrams over the next few days.
