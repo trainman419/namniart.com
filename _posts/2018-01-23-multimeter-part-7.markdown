@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 7"
-excerpt: Building a Nixie MultiMeter, Part 7
+excerpt: Resistor Selection for the Voltage Divider Ladder
 categories:
 - Electronics
 - PCB

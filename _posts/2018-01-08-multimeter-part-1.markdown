@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 1"
-excerpt: Building a Nixie MultiMeter, Part 1
+excerpt: New Project Time!
 categories:
 - Electronics
 - PCB

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 10"
-excerpt: Building a Nixie MultiMeter, Part 10
+excerpt: Current Sense Protection and Fuses
 categories:
 - Electronics
 - PCB

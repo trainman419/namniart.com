@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 5"
-excerpt: Building a Nixie MultiMeter, Part 5
+excerpt: MSP430 Multimeter Reference Design Review
 categories:
 - Electronics
 - PCB

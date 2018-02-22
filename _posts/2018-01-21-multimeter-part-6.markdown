@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 6"
-excerpt: Building a Nixie MultiMeter, Part 6
+excerpt: Designing the Voltage Divider Ladder
 categories:
 - Electronics
 - PCB

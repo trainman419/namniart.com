@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 2"
-excerpt: Building a Nixie MultiMeter, Part 2
+excerpt: IN-17 Nixie tube Datasheet Translation
 categories:
 - Electronics
 - PCB

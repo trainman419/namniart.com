@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 9"
-excerpt: Building a Nixie MultiMeter, Part 9
+excerpt: Current Sense Input Protection
 categories:
 - Electronics
 - PCB

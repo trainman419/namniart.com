@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 8"
-excerpt: Building a Nixie MultiMeter, Part 8
+excerpt: Schematic Streaming and Voltage Input Protection
 categories:
 - Electronics
 - PCB

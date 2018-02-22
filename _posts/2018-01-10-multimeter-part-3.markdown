@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 3"
-excerpt: Building a Nixie MultiMeter, Part 3
+excerpt: Finding and Analyzing Reference Designs
 categories:
 - Electronics
 - PCB

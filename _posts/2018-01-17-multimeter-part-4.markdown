@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 4"
-excerpt: Building a Nixie MultiMeter, Part 4
+excerpt: Searching for an ADC, and further Adventures
 categories:
 - Electronics
 - PCB
