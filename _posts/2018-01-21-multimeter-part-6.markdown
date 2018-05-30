@@ -56,7 +56,7 @@ I suspect that the selections for the 10mV range may make other parts of the des
 | Voltage Range               | 10mV    | 100mV    |
 |-----------------------------|---------|----------|
 | Input Voltage Resolution    | 1uV     | 10uV     |
-| ADC Voltage        (V\_max) | 9.1mV   | 91mW     |
+| ADC Voltage        (V\_max) | 9.1mV   | 91mV     |
 | Selected ADC Range (V\_fsr) | +/-14mV | +/-113mV |
 | Selected ADC Gain           | 64      | 8        |
 | Digits Per Bit              | 0.12    | 0.09     |
