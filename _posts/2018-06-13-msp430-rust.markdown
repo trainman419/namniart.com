@@ -14,26 +14,26 @@ I'm building on Ubuntu 14.04 which is quite old, so there are a probably a few q
 
  * Install MSP430 gcc toolchain: `sudo apt-get install binutils-msp430 gcc-msp430 gdb-msp430 msp430-libc msp430mcu mspdebug`
  * I already have rust installed, but I upgraded to nightly rust because the examples only build on nightly:
-  * `rustup install nightly`
-  * `rustup default nightly`
+   - `rustup install nightly`
+   - `rustup default nightly`
  * After googling for msp430 and rust I found [msp43-quickstart](https://github.com/japaric/msp430-quickstart)
-  * There are some additional instructions in [PR #3](https://github.com/japaric/msp430-quickstart/pull/3/files) that were quite useful. Most of these instructions are borrowed from there.
+   - There are some additional instructions in [PR #3](https://github.com/japaric/msp430-quickstart/pull/3/files) that were quite useful. Most of these instructions are borrowed from there.
  * I installed rust-src: `rustup component add rust-src`
  * Installed xargo: `cargo install xargo`
-  * Installing xargo from inside the msp430-quickstart project fails. I'm not sure why or how, but it's trying to pick up settings from that project.
-  * `cd ~`, `cargo install xargo` works.
+   - Installing xargo from inside the msp430-quickstart project fails. I'm not sure why or how, but it's trying to pick up settings from that project.
+   - `cd ~`, `cargo install xargo` works.
  * Cloned msp430-quickstart: `git clone https://github.com/japaric/msp430-quickstart.git`
  * `cd msp430-quickstart`
- * Tried to build with `xargo rustc --target msp430-none-elf --release -- -C link-arg=-Tlink.x -C link-arg=-mmcu=msp430g2553 -C link-arg=-nostartfiles -C linker=msp430-elf-gcc -Z linker-flavor=gcc`; failed to find `msp430-elf-gcc`.
-  * Build command from the [msp430\_rt crate](https://docs.rs/msp430-rt/0.1.0/msp430_rt/)
+ * Tried to build with `xargo rustc --target msp430-none-elf --release -- -C link-arg=-Tlink.x -C link-arg=-mmcu=msp430g2553 -C link-arg=-nostartfiles -C linker=msp430-elf-gcc -Z linker-flavor=gcc`; failed to find `msp430-elf-gcc`
+   - Build command from the [msp430\_rt crate](https://docs.rs/msp430-rt/0.1.0/msp430_rt/)
  * My compiler is named `msp430-gcc` so I created a shell script on my path named `msp430-elf-gcc` that does `exec msp430-gcc "$@"`
  * Retried build. Failed again with:
-```
-note: "msp430-elf-gcc" "-mcpu=msp430" "-c" "-o" "/tmp/xargo.XqgEMtdDHVan/target/msp430-none-elf/release/deps/core-2ec70cc69e40cb54.core0.rcgu.o" "/tmp/xargo.XqgEMtdDHVan/target/msp430-none-elf/release/deps/core-2ec70cc69e40cb54.core0.rcgu.s"
 
-note: Assembler messages:
-Fatal error: unrecognized cpu type msp430
-```
+        note: "msp430-elf-gcc" "-mcpu=msp430" "-c" "-o" "/tmp/xargo.XqgEMtdDHVan/target/msp430-none-elf/release/deps/core-2ec70cc69e40cb54.core0.rcgu.o" "/tmp/xargo.XqgEMtdDHVan/target/msp430-none-elf/release/deps/core-2ec70cc69e40cb54.core0.rcgu.s"
+        
+        note: Assembler messages:
+        Fatal error: unrecognized cpu type msp430
+
  * I am not able to find any results online for an error message that matches `unrecognized cpu type msp430` but my best guess is that I need a newer version of  msp430-gcc
 
 No luck, but it's time to call it a day. When I come back to this later I'll probably either try to upgrade to a newer version of Ubuntu (14.04 is ANCIENT!) or look for a PPA that has built a newer version of msp430 gcc for 14.04

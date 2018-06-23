@@ -20,21 +20,19 @@ It doesn't seem like that compiled the msp430-quickstart project; the target dir
 
 Looking at a more complex project, the [AT2XT](https://github.com/cr1901/AT2XT), they have their source code in the `src` directory, so I copied `examples/blinky.rs` to `src/main.rs` (not sure if the name is important or not). Now, doing `xargo build --target=msp430-none-elf --release` seems to make more progress and fails with:
 
-```
-   Compiling msp430-rt v0.1.2
-error[E0522]: definition of an unknown language item: `panic_fmt`
- --> /home/austin/.cargo/registry/src/github.com-1ecc6299db9ec823/msp430-rt-0.1.2/src/lang_items.rs:3:1
-  |
-3 | #[lang = "panic_fmt"]
-  | ^^^^^^^^^^^^^^^^^^^^^ definition of unknown language item `panic_fmt`
-
-error: aborting due to previous error
-
-For more information about this error, try `rustc --explain E0522`.
-error: Could not compile `msp430-rt`.
-warning: build failed, waiting for other jobs to finish...
-error: build failed
-```
+       Compiling msp430-rt v0.1.2
+    error[E0522]: definition of an unknown language item: `panic_fmt`
+     --> /home/austin/.cargo/registry/src/github.com-1ecc6299db9ec823/msp430-rt-0.1.2/src/lang_items.rs:3:1
+      |
+    3 | #[lang = "panic_fmt"]
+      | ^^^^^^^^^^^^^^^^^^^^^ definition of unknown language item `panic_fmt`
+    
+    error: aborting due to previous error
+    
+    For more information about this error, try `rustc --explain E0522`.
+    error: Could not compile `msp430-rt`.
+    warning: build failed, waiting for other jobs to finish...
+    error: build failed
 
 This looks like the msp430-rt crate is using something that doesn't exist in the nightly version of Rust. I'll have to check their bug tracker to see if there are any other reports of this.
 
