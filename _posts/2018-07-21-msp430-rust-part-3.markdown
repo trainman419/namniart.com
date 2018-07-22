@@ -1,0 +1,133 @@
+---
+layout: post
+title: "Rust on MSP430, Part 3"
+excerpt: Rust on MSP430: porting to MSP430FR2433
+categories:
+- Programming
+- Rust
+- MSP430
+---
+
+# It Builds!
+
+Wrapping up the previous posts about Rust on the MSP430
+
+![Rust blinkenlights!](/media/2018/07/21/blink.gif)
+
+Following up on the [issue I filed against msp430-rt](https://github.com/pftbest/msp430-rt/issues/2) last time, I followed the directions for the `panic_implementation` update, submitted my changes as a [pull request](https://github.com/pftbest/msp430-rt/pull/3) and they were accepted and uploaded to crates.io.
+
+With those fixes, I can now build the `blinky` example in [msp430-quickstart](https://github.com/japaric/msp430-quickstart) with `xargo build --target msp430-none-elf --release --example blinky`
+
+Unfortunately, I have a MSP430FR2433 demo board, but the examples are written for a MSP430G2553 board, so I needed to update them for my variant of the microcontroller and demo board.
+
+# Porting to MSP430FR2433
+
+There were three major steps to porting the existing quickstart demo to the board that I'm using:
+
+ * Generating the board package with Svd2Rust
+ * Updating the pin usage in the demos
+ * Debugging compile issues and memory layout
+
+## Svd2Rust
+
+The Svd2Rust tool is pretty amazing; it generates a Rust package with all of the register and bit definitions and access functions for a microcontroller, directly from a register description file from the manufacturer.
+
+The SVD format was developed for the ARM microcontrollers, but the MSP430 isn't an ARM core. For the MSP430 series we can generate the SVD file with [msp430\_svd](https://github.com/pftbest/msp430_svd): `cargo run -- msp430fr2433 | xmllint -format - > msp430fr2433.svd`
+
+From the generated SVD file, we can run [svd2rust](https://docs.rs/svd2rust/0.13.1/svd2rust/) to generate the Rust support package: `svd2rust -i msp430fr2433.svd --target msp430 > lib.rs`
+
+As recommended by svd2rust, I followed up the code generation by running `form -i lib.rs -o src` and `cargo fmt` to split the generated file up into modules and format it according to standard Rust style.
+
+I've uploaded the resulting [msp430fr2433 package to github](https://github.com/trainman419/msp430fr2433).
+
+## Updating the Demo
+
+I made three major changes to the demo to get it ready for testing on my board. I updated the dependencies so that it depends on my new package, I updated the demo to use the new register ownership model that svd2rust generates, and I updated the pin definitions to use the LED pins on my board.
+
+Since I have my `msp430fr2433` package checked out locally, I replaced the `msp430g2553` dependency in the `Cargo.toml` with:
+
+    [dependencies.msp430fr2433]
+    features = ["rt"]
+    path = "../msp430fr2433"
+
+I'm not quite sure what the ownership implications are, but the ownership model for peripherals has changed. The old code to access the watchdog timer was:
+
+    let wdt = msp430g2553::WATCHDOG_TIMER.borrow(&cs);
+
+The new version of this is:
+
+    let p = msp430fr2433::Peripherals::take().unwrap();
+    let wdt = p.WATCHDOG_TIMER;
+
+(Similar changes apply to the Port access register)
+
+Since my board is different from the one originally used by the quickstart, my LEDs are on pins P1.0 and P1.1 instead of the original pins. The old pin setup was:
+
+    // set P0 high and P6 low
+    port_1_2.p1out.modify(|_, w| w.p0().set_bit().p6().clear_bit());
+
+And the new pin setup is:
+
+    // set P1.0 high and P1.1 low
+    port_1_2.p1out.modify(|_, w| w.p1out0().set_bit().p1out1().clear_bit());
+
+I've made [a fork of the msp430-quickstart projet](https://github.com/trainman419/msp430-quickstart) and pushed my changes there. The full diff of my changes is [available on github](https://github.com/trainman419/msp430-quickstart/commit/25d19011595f1b9924168e13b31a16ab2ea9d770). (spoiler alert, this also includes some of my fixes from debugging)
+
+## Debugging
+
+To start, with my changes the quickstart demo builds, but I get a linker error:
+
+    /home/austin/ti/msp430-gcc/bin/../lib/gcc/msp430-elf/7.3.1/../../../../msp430-elf/bin/ld: address 0x100ce of /home/austin/msp430/msp430-quickstart/target/msp430-none-elf/debug/examples/blinky-652d021404ae3401 section `.vector_table' is not within region `VECTORS'
+    /home/austin/ti/msp430-gcc/bin/../lib/gcc/msp430-elf/7.3.1/../../../../msp430-elf/bin/ld: address 0x100ce of /home/austin/msp430/msp430-quickstart/target/msp430-none-elf/debug/examples/blinky-652d021404ae3401 section `.vector_table' is not within region `VECTORS'
+    /home/austin/ti/msp430-gcc/bin/../lib/gcc/msp430-elf/7.3.1/../../../../msp430-elf/bin/ld: 
+    The section .vector_table.interrupts appears to be wrong. It should
+    end at address 0xFFFE
+    collect2: error: ld returned 1 exit status
+
+I've seen a few embedded linking errors before; this one looks like the memory layout specified in the linker script isn't correct for this library and this microcontroller. With a new processor and new support library, the obvious thing to do is to check the memory layout in [the datasheet](http://www.ti.com/lit/ds/symlink/msp430fr2433.pdf) against the `memory.x` file in the project, and look for inconsistencies.
+
+Page 40 of the datasheet lists the vector table (interrupt handlers) as having a reserved region starting at `0xFF88`, with the vector table starting at `0xFFDA` and ending at `0xFFFE`.
+
+A search through the generated msp430fr2433 package finds the vector table in `src/interrupt/mod.rs`, and it includes the reserved region. With the reserved addresses, it totals 59 entries but does not include the reset handler.
+
+The original `memory.x` had the `VECTORS` region starting at `0xFFE0`; updating it to `0xFF88` better matches the documentation. To get the same end address, I had to update the size to 60 entries at 2 bytes each, for a total size of 120 bytes (or `0x78` in hex).
+
+With that update, I get a new linker error:
+
+    /home/austin/ti/msp430-gcc/bin/../lib/gcc/msp430-elf/7.3.1/../../../../msp430-elf/bin/ld: address 0x10076 of /home/austin/msp430/msp430-quickstart/target/msp430-none-elf/debug/examples/blinky-652d021404ae3401 section `.vector_table' is not within region `VECTORS'
+    /home/austin/ti/msp430-gcc/bin/../lib/gcc/msp430-elf/7.3.1/../../../../msp430-elf/bin/ld: address 0x10076 of /home/austin/msp430/msp430-quickstart/target/msp430-none-elf/debug/examples/blinky-652d021404ae3401 section `.vector_table' is not within region `VECTORS'
+    /home/austin/ti/msp430-gcc/bin/../lib/gcc/msp430-elf/7.3.1/../../../../msp430-elf/bin/ld: 
+    The section .vector_table.interrupts appears to be wrong. It should
+    end at address 0xFFFE
+    collect2: error: ld returned 1 exit status
+
+The end address is now `0x10076`, which indicates that the vector table is 118 bytes longer than it should be. 118 bytes is 59 x 2, which is suspiciously similar to the vector table size. Looking at the vector table source code carefully, the `Vector` object that defines each entry in the vector table is:
+
+    pub union Vector {
+        _handler: unsafe extern "msp430-interrupt" fn(),
+        _reserved: u32,
+    }
+
+It's union'ed with a 32-bit field, which means the minimum size is 32 bits, but the address size of the MSP430 is only 16 bits. Changing this to a 16-bit field fixes the remaining linker errors.
+
+    pub union Vector {
+        _handler: unsafe extern "msp430-interrupt" fn(),
+        _reserved: u16,
+    }
+
+While I'm here, I also updated the RAM and ROM start addresses and offsets in `memory.x` to match the datasheet.
+
+Success!?
+
+I was able to program my board and run the blinky demo with `mspdebug tilib 'prog target/msp430-none-elf/debug/examples/blinky'`! However, as soon as I powered the board off and back on again, it no longer blinks.
+
+After digging through the [original TI demo](http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP-EXP430FR2433/latest/index_FDS.html), I found that there's an additional initialization step needed for this microcontroller.
+
+Adding this initialization step to the blinky demo fixes the initialization:
+
+    let pmm = p.PMM;
+    pmm.pm5ctl0.modify(|_, w| w.locklpm5().clear_bit());
+
+And with that, it finally works reliably!
+
+![Rust blinkenlights!](/media/2018/07/21/blink.gif)
