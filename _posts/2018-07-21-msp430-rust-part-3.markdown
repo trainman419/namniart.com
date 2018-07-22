@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rust on MSP430, Part 3"
-excerpt: Rust on MSP430: porting to MSP430FR2433
+excerpt: "Rust on MSP430: porting to MSP430FR2433"
 categories:
 - Programming
 - Rust
