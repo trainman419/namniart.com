@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 16"
-excerpt: 
+excerpt: "Design Completion Checklist"
 categories:
 - Electronics
 - PCB
