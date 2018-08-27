@@ -15,7 +15,7 @@ I'm coming up on the end of this project; partly because I'm close to having the
     1. Higher-power op-amps for resistance drive and virtual ground
     1. Prevent floating leads/inputs in 4-wire mode
     1. LEDs for decimal point, range and mode indication
-    1. 3.3V regulator
+    1. 3\.3V regulator
     1. Power input jack
     1. Power supply decoupling for MSP430
     1. Power supply decoupling for op-amps
