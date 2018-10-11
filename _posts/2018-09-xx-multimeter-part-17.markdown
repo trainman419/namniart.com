@@ -55,14 +55,25 @@ The ADC parameters that I selected (all the way back in part 6) were borrowed fr
 
 Aliasing occurs when two processes overlap at constant intervals; for example a 500Hz switching regulator frequency would be 1/4 of the 2MHz modulator frequency, and could cause 1 in every 4 ADC samples to land on a significant peak or trough of the power supply ripple, which would cause the power supply noise to be over-represented in the final ADC sample.
 
+Typically, ADCs will have an analog low-pass filter at half the sample rate to filter out high-frequency noise; this filter would also help filter out power noise from other components, but it probably won't help with noise induced within the ADC. For an ADC sampling rate of 32k samples per second, the [Nyquist–Shannon sampling theorem](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem) states the the cutoff frequency should be set at half of the sampling rate; in this case that will be 16kHz.
+
 ### LTC6078 Power Noise
 
 The LTC6078 has a power supply rejection ratio of 97 dB, but it drops to zero around 4MHz:
 
 ![LTC6078 PSRR vs Frequency](/media/2018/08/27/LTC6078_PSRR.png)
 
-At 100kHz and above, the PSRR is only about 20dB, or a reduction of only about 10x between ripple on the power supply and ripple in the op-amp's output. This means that a power supply ripple as small as about 1uV would be output as ripple of 100nV, and could appear in the ADC output.
+Since the ADC will have a low-pass filter on the input, we only need to worry about noise rejection in the LTC6078 up to the cutoff frequency of 16kHz.
 
-## Filter
+At 16kHz and above, the PSRR is only about 25dB, or a reduction of about 17x between ripple on the power supply and ripple in the op-amp's output. This means that a power supply ripple as small as about 1.7uV would be output as ripple of 100nV, and could appear in the ADC output.
 
-It looks like the analog portion of the MSP430 can draw as much as 10mA. Each 24-bit ADC can draw a maximum of 1mA, not counting the current required to run the voltage reference. The 10-bit ADC can draw a maximum of 185uA, including the current required to run the voltage reference.
+Reducing the cutoff frequency to 10kHz would result in a PSRR of about 40dB, which is a 100x reduction in power supply ripple, and puts the maximum power supply ripple at 10uV.
+
+Power supply ripple for switching supplies is typically in the 250kHz to 1MHz range, so either of these filters will probably be acceptable.
+
+## Power Filter
+
+It looks like the analog portion of the MSP430 can draw as much as 10mA. Each 24-bit ADC can draw a maximum of 1mA, not counting the current required to run the voltage reference. The 10-bit ADC can draw a maximum of 185uA, including the current required to run the voltage reference. Combined with 160uA for the LTC6078, the total current for the precision analog side of the circuit is about 11mA.
+
+TI has a nice whitepaper on [Filtering Techniques: Isolating Analog and Digital Power
+Supplies in TI’s PLL-Based CDC Devices](http://www.ti.com/lit/an/scaa048/scaa048.pdf), which describes common power filtering techniques and recommends a ferrite bead and ceramic capacitor filter between the digital and analog supplies.
