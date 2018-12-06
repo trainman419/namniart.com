@@ -9,7 +9,7 @@ categories:
 
 # Power
 
-For this post, I will be focusing on as many of the parts of the power supply as I can fit into an evening.
+For this post, I will be focusing on the 3.3V digital and analog power supplies.
 
 ## 3.3V Power Supply
 
@@ -61,7 +61,7 @@ Typically, ADCs will have an analog low-pass filter at half the sample rate to f
 
 The LTC6078 has a power supply rejection ratio of 97 dB, but it drops to zero around 4MHz:
 
-![LTC6078 PSRR vs Frequency](/media/2018/08/27/LTC6078_PSRR.png)
+![LTC6078 PSRR vs Frequency](/media/2018/12/05/LTC6078_PSRR.png)
 
 Since the ADC will have a low-pass filter on the input, we only need to worry about noise rejection in the LTC6078 up to the cutoff frequency of 16kHz.
 
@@ -73,7 +73,40 @@ Power supply ripple for switching supplies is typically in the 250kHz to 1MHz ra
 
 ## Power Filter
 
-It looks like the analog portion of the MSP430 can draw as much as 10mA. Each 24-bit ADC can draw a maximum of 1mA, not counting the current required to run the voltage reference. The 10-bit ADC can draw a maximum of 185uA, including the current required to run the voltage reference. Combined with 160uA for the LTC6078, the total current for the precision analog side of the circuit is about 11mA.
+Based on the previous sections, the power supply and filters need to produce a 3.3V analog rail with no more than 10uV of ripple between a few hertz and the ADC sampling frequency of about 2MHz. This seems like a rather difficult target to hit, so I'm just going to try to create the best low-pass filter(s) for the power supply that I can, and see how close I can get.
+
+The 3.3V supply will look something like this:
+
+12V -> filter + regulation -> 3.3V -> filter -> 3.3V analog
+
+Switching regulators can produce a significant amount of output noise, so using a switching regulator to produce the 3.3V rail, and then trying to remove all of the switching noise for the 3.3V analog supply doesn't seem like it will work very well.
+
+Instead, I should probably try to produce a 3.3V supply with the lowest ripple possible, and then use additional filtering between the 3.3V and 3.3V analog supplies to further suppress ripple and remove any ripple that might be introduced by the other components on the 3.3V rail.
+
+From reading through The Art of Electronics, it looks like the best way to reduce any incoming ripple is with a combination of tranditional filtering and a circuit called a capacitance multiplier. After the filtering stages, a linear regulator can remove some of the remaining ripple and produce a regulated output voltage.
+
+12V -> filter? -> capacitance multiplier -> linear regulator -> 3.3V -> filter -> 3.3V analog
+
+(An interesting alternative is the [LT1533](https://www.analog.com/media/en/technical-documentation/data-sheets/1533f.pdf) and described in [Linear Tech App Note 70](https://www.analog.com/media/en/technical-documentation/application-notes/an70.pdf), but the IC is $10 and requires a separate transformer and inductors).
+
+[Linear Tech App Note 101](https://www.analog.com/media/en/technical-documentation/application-notes/an101f.pdf) has some fantastic advice and characterization of the noise produced by switching regulators, and how to reduce or eliminate it. Mostly, the takeaway here is that switching regulators produce high-frequency transients (up to several hundred megahertz!) and that the parasitics in typical capacitors and regulators aren't effective at blocking these frequencies, but that ferrite beads can be quite effective.
+
+As as starting point, I'm going to try to create a noise simulation in LTSpice, and then simulate a circuit which can remove that noise (and probably substantially more). For a basic starting point, I've chosen a [LT3062](https://www.analog.com/media/en/technical-documentation/data-sheets/3062fa.pdf) since it is a linear regulator that can take the full 12V input voltage, has a model in LTSpice, and is relatively cheap. Unsurprisingly, it doesn't have great power supply rejection at higher frequencies (10MHz), but at low frequencies it advertises an output ripple of 30uV!
+
+As a starting point, I've created a simulation of the input (green, upper plot) and output (blue, lower plot) of the LT3062 (the adjustable version, hence the voltage-setting resistors). I'm simulating the ouput of a rather nasty switching power supply with a 0.4Vpp sine wave at 500kHz, a 1Vpp exponential with a fundamental frequency around 10MHz, and a healthy dose of white noise. I'm using a resitive load of 150mA, and the simulated regulator's output is about 3.3V, with about 15uVpp of ripple. Not bad!
+
+[![Basic LTC3062 regulator](/media/2018/12/05/LT3062_base_thumb.png)](/media/2018/12/05/LT3062_base.png)
+
+Adding a ferrite bead knocks down the random, high-frequency noise considerably, and adding a capacitance multiplier (completely untuned!) knocks down the remaining noise to a value that LTSpice doesn't seem able to calculate correctly, but which appears to be less than 1uVpp. I'll take it!
+
+[![LT3062 With Capacitance Multiplier](/media/2018/12/05/LT3062_filtered_thumb.png)](/media/2018/12/05/LT3062_filtered.png)
+
+The only remaining consideration for this circuit is the power dissipation in the pass transistor and the regulator. Combined, all of the pass elements will need to drop 8.7V at up to 200mA, and dissipate the resulting 1.75W of heat.
+With the simulation at 200mA, the regulator needs to dissipate about 1.35W, and the pass transistor dissipates about 0.5W. I'd rater disspate that power in different part of the circuit, so I've added a resistor between the capacitance multiplier and the regulator. I've chosen the resitor value so that it drops about 5V and disspates about 1W at maximum current. At lower currents, it will have a lower voltage drop and disspate less current. At higher currents, it will limit the total current through the circuit.
+
+[![LT3062 With Capacitance Multiplier and limit resistor](/media/2018/12/05/LT3062_limited_thumb.png)](/media/2018/12/05/LT3062_limited.png)
+
+For the final analog filter, it looks like the analog portion of the MSP430 can draw as much as 10mA. Each 24-bit ADC can draw a maximum of 1mA, not counting the current required to run the voltage reference. The 10-bit ADC can draw a maximum of 185uA, including the current required to run the voltage reference. Combined with 160uA for the LTC6078, the total current for the precision analog side of the circuit is about 11mA.
 
 TI has a nice whitepaper on [Filtering Techniques: Isolating Analog and Digital Power
-Supplies in TI’s PLL-Based CDC Devices](http://www.ti.com/lit/an/scaa048/scaa048.pdf), which describes common power filtering techniques and recommends a ferrite bead and ceramic capacitor filter between the digital and analog supplies.
+Supplies in TI’s PLL-Based CDC Devices](http://www.ti.com/lit/an/scaa048/scaa048.pdf), which describes common power filtering techniques and recommends a ferrite bead and ceramic capacitor filter between the digital and analog supplies. Given that this will only be filtering out noise induced by other components in the 3.3V circuit, this will probably be more than adequate.
