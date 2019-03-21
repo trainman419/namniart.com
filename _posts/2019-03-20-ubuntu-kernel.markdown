@@ -650,3 +650,7 @@ Further progress; now `Debug: binary-udebs` fails:
 Looks like most of those are due to my choice of kernel config. I think I can suppress them by listing those modules (or module groups?) in `debian.master/d-i/exclude-modules.amd64-my_flavour`
 
 ... build continues ...
+
+BUILD SUCCESS!
+
+Figuring out if it actually works will be a task for another day...
