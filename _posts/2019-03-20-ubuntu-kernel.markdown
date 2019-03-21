@@ -532,4 +532,77 @@ At this point, I _should_ be able to run the build and get all the packages out 
 
     CONCURRENCY_LEVEL=24 fakeroot ./debian/rules binary
 
+(yes, I have a 24-core machine. Set `CONCURRENCY_LEVEL` appropriately for your computer)
+
+Unsurprisingly, I'm not quite that lucky:
+
+    /home/austin/linux/scripts/Makefile.headersinst:63: *** Some mandatory headers (poll.h) are missing in arch/x86/include/uapi/asm.  Stop.
+    make[3]: *** [asm] Error 2
+    make[2]: *** [headers_install] Error 2
+    make[2]: Leaving directory `/home/austin/linux/debian/tmp-headers'
+    make[1]: *** [sub-make] Error 2
+    make[1]: Leaving directory `/home/austin/linux'
+    make: *** [install-arch-headers] Error 2
+
+Also of note, the version reported during the build is completely wrong. Adding the appropriate entry to `debian.master/changelog` quickly fixes that.
+
+It looks like the missing `poll.h` header has moved from `arch/x86/include/uapi/asm/poll.h` to `arch/x86/include/generated/uapi/asm/poll.h` as some point. It looks like the Bionic `hwe-edge` branch currently has a similar kernel version and some build support for that, so I'll try to port that in.
+
+... hours pass ...
+
+I finally tracked down the build issue. It seems to be some kind of issue if the local kernel build tree is not completely clean. I removed all of the generated headers, and the build seems to be past that step. 
+
+I encountered a few other errors that were also resolved by cleaning my source directory (I had been doing normal builds in it before I added the debian rules). `make mrproper` will clean out EVERYTHING, but unfortunately this also includes the `debian` directory that I'm working on. Luckily I habitually check things into git so all I had to do to recover was a git checkout. I also added this patch to skip that step in the future (I'm on a 4.19.2 kernel. YMMV):
+
+    diff --git a/scripts/package/Makefile b/scripts/package/Makefile
+    index 73503ebce632..d96ac1649aea 100644
+    --- a/scripts/package/Makefile
+    +++ b/scripts/package/Makefile
+    @@ -82,7 +82,7 @@ bindeb-pkg: FORCE
+     intdeb-pkg: FORCE
+            +$(CONFIG_SHELL) $(srctree)/scripts/package/builddeb
+     
+    -clean-dirs += $(objtree)/debian/
+    +#clean-dirs += $(objtree)/debian/
+     
+     # snap-pkg
+     # ---------------------------------------------------------------------------
+
+The config/enforce step also found a few options that I should enable, so I used `fakeroot ./debian/rules editconfigs` to edit my flavours and enable those configs. (The search operator, `/`, in menuconfig makes finding and enabling the missing options easy). This also moved all of my config options from my flavour to the common options, but that seems like the desired behavior so I left it. If I find myself needing to add move flavours later, this is probably the right path to take.
+
+... building again ... more hours pass ...
+
+Modules packaging error because I had `CONFIG_LOCALVERSION` set. Reset it to the empty string in my config.
+
+... building ... minutes pass ...
+
+Module check failed:
+
+    Debug: module-check-my_flavour
+    II: Checking modules for my_flavour...     prev_abidir : /home/austin/linux/debian.master/abi/4.19.2-0.0/amd64previous or current modules file missing!
+       /home/austin/linux/debian.master/abi/4.19.2-1/amd64/my_flavour.modules
+       /home/austin/linux/debian.master/abi/4.19.2-0.0/amd64/my_flavour.modules
+
+Really, since I'm bootstrapping a branch new kernel, I don't have a previous ABI version to check against so I'd like to either disable this check or bootstrap it with itself.
+
+It looks like this check can be skipped by adding an ignore file for the "previous" version:
+
+    $ mkdir -p debian.master/abi/4.19.2-0.0/amd64
+    $ touch debian.master/abi/4.19.2-0.0/amd64/ignore
+
+I had to add similar ignores for modules:
+
+    $ touch debian.master/abi/4.19.2-0.0/amd64/ignore.modules
+
+Finally, the retpoline check also failed for a similar reason, so I fixed it by duplicating the new retpoline to the "previous" version:
+
+    $ cp debian.master/abi/4.19.2-1/amd64/my_flavour.retpoline debian.master/abi/4.19.2-0.0/amd64/
+
+... more time passes ...
+
+Another stray build error appears:
+
+    dpkg-gencontrol: error: package linux-image-unsigned-4.19.2-1-my_flavour not in control info
+    dh_gencontrol: dpkg-gencontrol -plinux-image-unsigned-4.19.2-1-my_flavour -ldebian/changelog -Tdebian/linux-image-unsigned-4.19.2-1-my_flavour.substvars -Pdebian/linux-image-unsigned-4.19.2-1-my_flavour -Vlinux:rprovides= returned exit code 255
+    make: *** [binary-my_flavour] Error 25
 
