@@ -157,3 +157,379 @@ It seems quite unusual to generate the `debian/control` file in this manner. Thi
  * `debian/tools/generic` appears to be a generic entrypoint for tools that are tied to the kernel version. It reads the name that it is invoked as, looks for an executable of the same name within a kernel-specific directory, and tries to invoke it. Clever, and almost certainly will not require modification.
 
 ## `debian.master`
+
+Listing of `debian.master`:
+
+    $ tree debian.master
+    debian.master
+    ├── abi
+    │   ├── 3.2.0-125.168
+    │   │   ├── abiname
+    │   │   ├── amd64
+    │   │   │   ├── generic
+    │   │   │   ├── generic.compiler
+    │   │   │   ├── generic.modules
+    │   │   │   ├── virtual
+    │   │   │   ├── virtual.compiler
+    │   │   │   └── virtual.modules
+    │   │   ├── armel
+    │   │   │   ├── omap
+    │   │   │   ├── omap.compiler
+    │   │   │   └── omap.modules
+    │   │   ├── armhf
+    │   │   │   ├── highbank
+    │   │   │   ├── highbank.compiler
+    │   │   │   ├── highbank.modules
+    │   │   │   ├── omap
+    │   │   │   ├── omap.compiler
+    │   │   │   └── omap.modules
+    │   │   ├── fwinfo
+    │   │   ├── i386
+    │   │   │   ├── generic
+    │   │   │   ├── generic.compiler
+    │   │   │   ├── generic.modules
+    │   │   │   ├── generic-pae
+    │   │   │   ├── generic-pae.compiler
+    │   │   │   ├── generic-pae.modules
+    │   │   │   ├── virtual
+    │   │   │   ├── virtual.compiler
+    │   │   │   └── virtual.modules
+    │   │   └── powerpc
+    │   │       ├── powerpc64-smp
+    │   │       ├── powerpc64-smp.compiler
+    │   │       ├── powerpc64-smp.modules
+    │   │       ├── powerpc-smp
+    │   │       ├── powerpc-smp.compiler
+    │   │       └── powerpc-smp.modules
+    │   └── perm-blacklist
+    ├── changelog
+    ├── changelog.historical
+    ├── config
+    │   ├── amd64
+    │   │   ├── config.common.amd64
+    │   │   ├── config.flavour.generic
+    │   │   └── config.flavour.virtual
+    │   ├── armel
+    │   │   ├── config.common.armel
+    │   │   └── config.flavour.omap
+    │   ├── armhf
+    │   │   ├── config.common.armhf
+    │   │   ├── config.flavour.highbank
+    │   │   └── config.flavour.omap
+    │   ├── config.common.ports
+    │   ├── config.common.ubuntu
+    │   ├── enforce
+    │   ├── i386
+    │   │   ├── config.common.i386
+    │   │   ├── config.flavour.generic
+    │   │   ├── config.flavour.generic-pae
+    │   │   └── config.flavour.virtual
+    │   ├── powerpc
+    │   │   ├── config.common.powerpc
+    │   │   ├── config.flavour.powerpc64-smp
+    │   │   └── config.flavour.powerpc-smp
+    │   └── ppc64
+    │       ├── config.common.ppc64
+    │       └── config.flavour.powerpc64-smp
+    ├── control.d
+    │   ├── flavour-control.stub
+    │   ├── vars.generic
+    │   ├── vars.generic-pae
+    │   ├── vars.highbank
+    │   ├── vars.omap
+    │   ├── vars.powerpc64-smp
+    │   ├── vars.powerpc-smp
+    │   ├── vars.virtual
+    │   └── virtual.inclusion-list
+    ├── control.stub.in
+    ├── copyright
+    ├── deviations.txt
+    ├── d-i
+    │   ├── exclude-firmware.armel-omap
+    │   ├── exclude-firmware.armhf-highbank
+    │   ├── exclude-firmware.armhf-omap
+    │   ├── exclude-modules.amd64-virtual
+    │   ├── exclude-modules.armel-omap
+    │   ├── exclude-modules.armhf-highbank
+    │   ├── exclude-modules.armhf-omap
+    │   ├── exclude-modules.i386-virtual
+    │   ├── exclude-modules.ia64
+    │   ├── exclude-modules.powerpc
+    │   ├── exclude-modules.sparc
+    │   ├── firmware
+    │   │   ├── nic-modules
+    │   │   ├── README.txt
+    │   │   └── scsi-modules
+    │   ├── kernel-versions.in
+    │   ├── modules
+    │   │   ├── block-modules
+    │   │   ├── crypto-modules
+    │   │   ├── fat-modules
+    │   │   ├── fb-modules
+    │   │   ├── firewire-core-modules
+    │   │   ├── floppy-modules
+    │   │   ├── fs-core-modules
+    │   │   ├── fs-secondary-modules
+    │   │   ├── input-modules
+    │   │   ├── ipmi-modules
+    │   │   ├── irda-modules
+    │   │   ├── md-modules
+    │   │   ├── message-modules
+    │   │   ├── mouse-modules
+    │   │   ├── multipath-modules
+    │   │   ├── nfs-modules
+    │   │   ├── nic-modules
+    │   │   ├── nic-pcmcia-modules
+    │   │   ├── nic-shared-modules
+    │   │   ├── nic-usb-modules
+    │   │   ├── parport-modules
+    │   │   ├── pata-modules
+    │   │   ├── pcmcia-modules
+    │   │   ├── pcmcia-storage-modules
+    │   │   ├── plip-modules
+    │   │   ├── ppp-modules
+    │   │   ├── sata-modules
+    │   │   ├── scsi-modules
+    │   │   ├── serial-modules
+    │   │   ├── speakup-modules
+    │   │   ├── squashfs-modules
+    │   │   ├── storage-core-modules
+    │   │   ├── usb-modules
+    │   │   ├── virtio-modules
+    │   │   └── vlan-modules
+    │   ├── modules-powerpc
+    │   │   ├── block-modules
+    │   │   ├── message-modules
+    │   │   ├── nic-modules
+    │   │   ├── scsi-modules
+    │   │   └── storage-core-modules
+    │   ├── modules-sparc
+    │   │   ├── block-modules
+    │   │   └── message-modules
+    │   └── package-list
+    ├── etc
+    │   ├── getabis
+    │   └── kernelconfig
+    ├── NOTES
+    └── rules.d
+        ├── amd64.mk
+        ├── armel.mk
+        ├── armhf.mk
+        ├── i386.mk
+        ├── powerpc.mk
+        └── ppc64.mk
+
+Off the top, a few of these directories and files look familiar from looking through previous rules:
+
+ * `debian.master/abi` ABI symbol definitions for kernel variants. I think these are checked in to make sure that new kernels are ABI compatible with previous builds of the same kernel.
+ * `debian.master/changelog` and `debian.master/changelog.historical`: the standard debian package changelog.
+ * `debian.master/config` directory appears to contain common and flavor-specific configs. I suspect this is where the majority of the work will happen.
+ * `debian.master/config/enforce` appears to be some kind of validation that every flavor has some config options set. `debian/scripts/config-check` appears to use this file.
+ * `debian.master/control.d` appear to be debian control file chunks that are included for each kernel flavor.
+ * `debian.master/control.stub.in` is the template for the control file; covered in previous section.
+ * `debian.master/copyright` copyright. Read it, respect it.
+ * `debian.master/deviations.txt` appears to be a partial list of changes. Not sure what these are against...
+ * `debian.master/d-i` I'll come back to this one.
+ * `debian.master/etc` scripts appear to be used by `debian/scripts/misc`. Not quire sure what these do, but they feel old and maybe a little crusty.
+ * `debian.master/NOTES` someone left their notes here. Seems to be mostly notes about which patches are applied to this kernel.
+ * `debian.master/rules.d` arch-specific build rules; see `debian.rules` section above.
+
+## `debian.master/d-i`
+
+I said I'd come back to it!
+
+This directory contains the `kernel-versions.in` file which seems to contain metadata about the arch/flavour combinations, covered above when going through `debian/rules`
+
+The rest of this directory seems to contain files that map kernel modules to modules packages, and blacklists for some of those modules packages on some arch/flavour combinations. This looks completely unfamiliar to me; I don't think these packages are part of my current Ubuntu distribution.
+
+DOH! I've been looking at the kernel build system for Ubuntu Precise (12.04), released in 2012! No wonder these flavors look a little old.
+
+# Switch gears to Ubuntu 14.04 and 18.04
+
+Ok; now checking out the 14.04 kernel to see how it has evolved:
+
+    git clone git://kernel.ubuntu.com/ubuntu/ubuntu-trusty.git
+
+The `debian` directory and `debian/rules` appear largely unchanged. There are a few more scripts in `debian/scripts`, but the overall structure appears unchanged.
+
+The `debian.master` directory has substaintially more flavours, but again appears otherwise unchanged.
+
+Comparing with 18.04 ( `git://kernel.ubuntu.com/ubuntu/ubuntu-bionic.git` ), most of the structure again appears the same, but the structure of `debian.master/d-i/firmware` and `debian.master/d-i/modules` appears to have a bunch of new sub-directories for each architecture.
+
+# The Transplant
+
+Now that I have the lay of the land, I think it's time to try transplanting these changes onto my kernel and attempting a build.
+
+I copied over all of `debian` and `debian.master` from ubuntu's kernel into my kernel tree. Since I'm only focusing on an amd64 architecture, I removed the files for all of the other architectures. I now have the following directory structure alongside the rest of the kernel source:
+
+    debian
+    ├── cloud-tools
+    │   ├── hv_get_dhcp_info
+    │   ├── hv_get_dns_info
+    │   └── hv_set_ifconfig
+    ├── commit-templates
+    │   ├── bumpabi
+    │   ├── config-updates
+    │   ├── external-driver
+    │   ├── missing-modules
+    │   ├── newrelease
+    │   ├── sauce-patch
+    │   └── upstream-patch
+    ├── compat
+    ├── control.d
+    │   └── flavour-buildinfo.stub
+    ├── debian.env
+    ├── docs
+    │   └── README.inclusion-list
+    ├── gbp.conf
+    ├── linux-cloud-tools-common.hv-fcopy-daemon.upstart
+    ├── linux-cloud-tools-common.hv-kvp-daemon.upstart
+    ├── linux-cloud-tools-common.hv-vss-daemon.upstart
+    ├── rules
+    ├── rules.d
+    │   ├── 0-common-vars.mk
+    │   ├── 1-maintainer.mk
+    │   ├── 2-binary-arch.mk
+    │   ├── 3-binary-indep.mk
+    │   ├── 4-checks.mk
+    │   └── 5-udebs.mk
+    ├── scripts
+    │   ├── abi-check
+    │   ├── config-check
+    │   ├── control-create
+    │   ├── helpers
+    │   │   ├── close
+    │   │   ├── open
+    │   │   └── rebase
+    │   ├── link-headers
+    │   ├── misc
+    │   │   ├── final-checks
+    │   │   ├── find-obsolete-firmware
+    │   │   ├── fw-to-ihex.sh
+    │   │   ├── gen-auto-reconstruct
+    │   │   ├── getabis
+    │   │   ├── get-firmware
+    │   │   ├── git-ubuntu-log
+    │   │   ├── insert-changes.pl
+    │   │   ├── insert-mainline-changes
+    │   │   ├── insert-ubuntu-changes
+    │   │   ├── kernelconfig
+    │   │   ├── retag
+    │   │   └── splitconfig.pl
+    │   ├── module-check
+    │   ├── module-inclusion
+    │   ├── retpoline-check
+    │   ├── retpoline-extract
+    │   ├── retpoline-extract-one
+    │   └── sub-flavour
+    ├── source
+    │   ├── format
+    │   └── options
+    ├── stamps
+    │   └── keep-dir
+    ├── templates
+    │   ├── extra.postinst.in
+    │   ├── extra.postrm.in
+    │   ├── headers.postinst.in
+    │   ├── image.postinst.in
+    │   ├── image.postrm.in
+    │   ├── image.preinst.in
+    │   └── image.prerm.in
+    ├── tests
+    │   ├── control
+    │   ├── rebuild
+    │   └── ubuntu-regression-suite
+    ├── tests-build
+    │   ├── check-aliases
+    │   └── README
+    └── tools
+        └── generic
+    debian.master
+    ├── abi
+    │   └── perm-blacklist
+    ├── changelog
+    ├── changelog.historical
+    ├── config
+    │   ├── amd64
+    │   │   ├── config.common.amd64
+    │   │   ├── config.flavour.generic
+    │   │   └── config.flavour.lowlatency
+    │   ├── annotations
+    │   ├── config.common.ports
+    │   ├── config.common.ubuntu
+    │   └── enforce
+    ├── control.d
+    │   ├── flavour-control.stub
+    │   ├── generic.inclusion-list
+    │   ├── vars.generic
+    │   └── vars.lowlatency
+    ├── control.stub.in
+    ├── copyright
+    ├── d-i
+    │   ├── exclude-modules.amd64-virtual
+    │   ├── firmware
+    │   │   ├── kernel-image
+    │   │   ├── nic-modules
+    │   │   ├── README.txt
+    │   │   └── scsi-modules
+    │   ├── kernel-versions.in
+    │   ├── modules
+    │   │   ├── block-modules
+    │   │   ├── crypto-modules
+    │   │   ├── fat-modules
+    │   │   ├── fb-modules
+    │   │   ├── firewire-core-modules
+    │   │   ├── floppy-modules
+    │   │   ├── fs-core-modules
+    │   │   ├── fs-secondary-modules
+    │   │   ├── input-modules
+    │   │   ├── ipmi-modules
+    │   │   ├── irda-modules
+    │   │   ├── kernel-image
+    │   │   ├── md-modules
+    │   │   ├── message-modules
+    │   │   ├── mouse-modules
+    │   │   ├── multipath-modules
+    │   │   ├── nfs-modules
+    │   │   ├── nic-modules
+    │   │   ├── nic-pcmcia-modules
+    │   │   ├── nic-shared-modules
+    │   │   ├── nic-usb-modules
+    │   │   ├── parport-modules
+    │   │   ├── pata-modules
+    │   │   ├── pcmcia-modules
+    │   │   ├── pcmcia-storage-modules
+    │   │   ├── plip-modules
+    │   │   ├── ppp-modules
+    │   │   ├── sata-modules
+    │   │   ├── scsi-modules
+    │   │   ├── serial-modules
+    │   │   ├── speakup-modules
+    │   │   ├── squashfs-modules
+    │   │   ├── storage-core-modules
+    │   │   ├── usb-modules
+    │   │   ├── virtio-modules
+    │   │   └── vlan-modules
+    │   └── package-list
+    ├── etc
+    │   ├── getabis
+    │   └── kernelconfig
+    ├── NOTES
+    ├── reconstruct
+    ├── rules.d
+    │   └── amd64.mk
+    └── tracking-bug
+
+As a quick check that things are not completely insane, I ran `fakeroot ./debian/rules clean` and was pleasantly surprised to find that it succeeded.
+
+Since I'm only trying to build one flavor (my custom flavour), I made the following hacks:
+ * Modified `debian.master/rules.d/amd64.mk` to list only that flavour in the `flavours`
+ * Removed the contents of `debian.master/config/config.common.ubuntu` and `debian.master/config/amd64/config.common.amd64`
+ * Deleted `debian.master/config/amd64/config.flavour.generic` and `debian.master/config/amd64/config.flavour.lowlatency`
+ * Created `debian.master/config/amd64/config.flavour.my-flavour` with my entire kernel config.
+
+At this point, I _should_ be able to run the build and get all the packages out of it. Let's see if it works...
+
+    CONCURRENCY_LEVEL=24 fakeroot ./debian/rules binary
+
+
