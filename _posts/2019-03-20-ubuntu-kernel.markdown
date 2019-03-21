@@ -606,3 +606,47 @@ Another stray build error appears:
     dh_gencontrol: dpkg-gencontrol -plinux-image-unsigned-4.19.2-1-my_flavour -ldebian/changelog -Tdebian/linux-image-unsigned-4.19.2-1-my_flavour.substvars -Pdebian/linux-image-unsigned-4.19.2-1-my_flavour -Vlinux:rprovides= returned exit code 255
     make: *** [binary-my_flavour] Error 25
 
+Looks like this is due to the `debian/control` file not being generated correctly; it still has entries for the original `generic` and `lowlatecy` flavours, instead of `my_flavour`.
+
+Removed the old lowlatency control variables and renamed the other one to my flavour:
+
+    rm debian.master/control.d/vars.lowlatency
+    mv debian.master/control.d/vars.generic debian.master/control.d/vars.my_flavour
+
+`debian.master/d-i/kernel-versions.in` also needed an update, to change the flavour from `generic` to `my_flavour`.
+
+Luckily, these changes are easy to verify by running `fakeroot ./debian/rules clean` and then inspecting the resulting `debian/control` file.
+
+... another interminable wait for the build ...
+
+Further progress; now `Debug: binary-udebs` fails:
+
+    find: `debian/serial-modules-4.19.2-1-my_flavour-di': No such file or directory
+    serial-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/ppp-modules-4.19.2-1-my_flavour-di': No such file or directory
+    ppp-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/firewire-core-modules-4.19.2-1-my_flavour-di': No such file or directory
+    firewire-core-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/plip-modules-4.19.2-1-my_flavour-di': No such file or directory
+    plip-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/pcmcia-storage-modules-4.19.2-1-my_flavour-di': No such file or directory
+    pcmcia-storage-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/irda-modules-4.19.2-1-my_flavour-di': No such file or directory
+    irda-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/parport-modules-4.19.2-1-my_flavour-di': No such file or directory
+    parport-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/nic-pcmcia-modules-4.19.2-1-my_flavour-di': No such file or directory
+    nic-pcmcia-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/pcmcia-modules-4.19.2-1-my_flavour-di': No such file or directory
+    pcmcia-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/squashfs-modules-4.19.2-1-my_flavour-di': No such file or directory
+    squashfs-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/speakup-modules-4.19.2-1-my_flavour-di': No such file or directory
+    speakup-modules-4.19.2-1-my_flavour-di will be empty
+    find: `debian/fs-core-modules-4.19.2-1-my_flavour-di': No such file or directory
+    fs-core-modules-4.19.2-1-my_flavour-di will be empty
+    make[1]: *** [do-binary-udebs] Error 1
+
+Looks like most of those are due to my choice of kernel config. I think I can suppress them by listing those modules (or module groups?) in `debian.master/d-i/exclude-modules.amd64-my_flavour`
+
+... build continues ...
