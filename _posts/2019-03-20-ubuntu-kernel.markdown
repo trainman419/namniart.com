@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Dissecting the Ubuntu Kernel Packaging System"
-excerpt: "How a kernel becomes ubuntu kernel packages"
+title: "Dissecting Ubuntu Kernel Packaging"
+excerpt: "How a kernel becomes ubuntu kernel packages, the hard way."
 categories:
 - Linux
 ---
 
-# Dissecting the Ubuntu Kernel Packaging System
+# WHY???
 
 For a project at my day job, I need to build a custom version of the linux kernel and package it in a way that is compatible with Ubuntu. The Linux kernel includes some build rules for debian packages, but these don't seem to work very well ( `make bindeb-pkg` works, but `make deb-pkg` doesn't). The debian packaging rules also omit the kernel debug symbols and the perf tools packages, which we need.
 
