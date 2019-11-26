@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nixie MultiMeter, Part 15"
-excerpt: 
+excerpt: Multi-board Schematics, Resistance Measurements, and more!
 categories:
 - Electronics
 - PCB
