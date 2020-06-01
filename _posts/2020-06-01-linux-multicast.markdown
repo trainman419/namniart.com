@@ -14,11 +14,11 @@ categories:
 IPv4 multicast seems like a wonderful idea: you send one packet, your network
 processes it and sends a copy of it to each host that needs it. Over the years,
 wiser network engineers than myself have learned that multicast on a routed
-network can be difficult to configured and may not be worthwhile, but
+network can be difficult to configure and may not be worthwhile, but
 multicast has found adoption on local networks as an alternative to broadcast,
-and can even be relatively efficient if the majority of network switches
-support IGMP snooping. There are, however, many pitfalls on the path to using
-multicast on a local network.
+and can be efficient if the majority of network switches support IGMP snooping.
+There are, however, many pitfalls on the path to using multicast on a local
+network.
 
 If you want to use multicast on a Linux host with multiple network interface,
 in addition to the usual pitfalls and traps, there are several well-hidden
@@ -26,11 +26,25 @@ tar pits where you can get stuck for days or weeks.
 
 ## Background on IGMP and Multicast Group Membership
 
-TODO: IGMP membership
-TODO: IPv4 to layer-2 address mapping
+### IGMP and Membership
 
-TODO: Multicast vs IGMP - subtle but important difference.
-TODO: Background on how multicast addresses are allocated, and link to current
+The IGMP protcol is used by hosts to inform the routers and switches on their local network that they wish to receive multicast traffic. End devices send IGMP membership advertisement, and routers and IGMP-aware switches listen for these IGMP membership advertisements and ensure that multicast traffic is forwarded to those end devices. The IGMP protocol is defined by [RFC-1112 (IGMP v1)](https://tools.ietf.org/html/rfc1112), [RFC-2236 (IGMP v2)](https://tools.ietf.org/html/rfc2236) and [RFC-3376 (IGMP v3)](https://tools.ietf.org/html/rfc3376).
+
+### IPv4 Multicast to Ethernet Layer 2 address mapping
+
+To allow switches to handle IPv4 multicast traffic with minmal knowledge of IPv4, each IPv4 multicast address is mapped to an Ethernet MAC address by [Section 6.4 of RFC-1112](https://tools.ietf.org/html/rfc1112#section-6.4). The lower 23 bits of the IPv4 multicast address are placed in the lower 23 bits of the `01:00:5E:00:00:00` MAC address to create the Ethernet multicast address. (This results in multiple IPv4 multicast addresses mapping to the same Ethernet address).
+
+### Multicast vs IGMP
+When working with multicast, it is important to recognize that IPv4 multicast, Ethernet multicast, and IGMP are related but separate protocols. IGMP is used to dynamically define and manage multicast groups on a network, but the actual packet forwarding is handled by the network switches based on the packet's Ethernet multicast address, and by routers based on the packet's IPv4 multicast address.
+
+In many switches, you may only be able to inspect IPv4 or Ethernet multicast address, and it is important to know how they are related in order to debug forwarding issues.
+
+Some switches may also be configured with static multicast group memberships based on the IPv4 or Ethernet address of the group. The implementation of this is left entirely to the network switch vendor and varies significantly between switches.
+
+### IPv4 Multicast Address Allocation
+IPv4 multicast addresses are [allocated by the IANA](https://www.iana.org/assignments/multicast-addresses/multicast-addresses.xhtml). Generally, these addresses are allocated to protocols that operate on local networks and which need unique identifiers.
+
+Of special note is the 239.0.0.0/24 range, which is allocated for use within an organization and which should not be routed across the internet. This range is defined by [RFC-2365](https://tools.ietf.org/html/rfc2365).
 multicast address allocations.
 
 ## IGMP snooping switches without an IGMP Querier
@@ -81,7 +95,9 @@ on the same subnet that is explicitly for use by the IGMP querier.
 
 ## Sniffing Multicast traffic
 
-TODO: document pitfalls around not being able to sniff IGMP because the switch
+Since switches with IGMP snooping only send multicast data to the ports that are joined to those groups, common packet capture tools such as tcpdump and wireshark will not capture any multicast traffic if they device where they are run is not joined to the multicast groups of interest.
+
+The best solution that I have found for this is to either write custom python tols to join the relevant multicast groups and capture the traffic, or to configure the switch to forward all multicast traffic to the port in question; most switches call this "router mode."
 isn't sending you any packets!
 
 ## Inbound Multicast on Multi-homed Hosts
