@@ -14,6 +14,7 @@ a {
 h1 {
    font-size: 48px;
    font-family: Helvetica,Arial,sans-serif;
+   line-height: 110%;
 }
 
 h2 {
