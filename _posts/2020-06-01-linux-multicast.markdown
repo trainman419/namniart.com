@@ -32,7 +32,7 @@ The IGMP protcol is used by hosts to inform the routers and switches on their lo
 
 ### IPv4 Multicast to Ethernet Layer 2 address mapping
 
-To allow switches to handle IPv4 multicast traffic with minmal knowledge of IPv4, each IPv4 multicast address is mapped to an Ethernet MAC address by [Section 6.4 of RFC-1112](https://tools.ietf.org/html/rfc1112#section-6.4). The lower 23 bits of the IPv4 multicast address are placed in the lower 23 bits of the `01:00:5E:00:00:00` MAC address to create the Ethernet multicast address. (This results in multiple IPv4 multicast addresses mapping to the same Ethernet address).
+To allow switches to handle IPv4 multicast traffic with minimal knowledge of IPv4, each IPv4 multicast address is mapped to an Ethernet MAC address by [Section 6.4 of RFC-1112](https://tools.ietf.org/html/rfc1112#section-6.4). The lower 23 bits of the IPv4 multicast address are placed in the lower 23 bits of the `01:00:5E:00:00:00` MAC address to create the Ethernet multicast address. (This results in multiple IPv4 multicast addresses mapping to the same Ethernet address).
 
 ### Multicast vs IGMP
 When working with multicast, it is important to recognize that IPv4 multicast, Ethernet multicast, and IGMP are related but separate protocols. IGMP is used to dynamically define and manage multicast groups on a network, but the actual packet forwarding is handled by the network switches based on the packet's Ethernet multicast address, and by routers based on the packet's IPv4 multicast address.
@@ -99,20 +99,20 @@ Again, the fix here is pretty simple: allocate an IP address to your switch,
 and set the IGMP to the switch's IP address, or allocate a dedicated IP address
 on the same subnet that is explicitly for use by the IGMP querier.
 
-In the example above, the swich should be allocated an IP address from the 192.168.2.0/24 range; perhaps 192.168.2.3, since this address is not currently used.
+In the example above, the switch should be allocated an IP address from the 192.168.2.0/24 range; perhaps 192.168.2.3, since this address is not currently used.
 
 ## Sniffing Multicast traffic
 
 Since switches with IGMP snooping only send multicast data to the ports that are joined to those groups, common packet capture tools such as tcpdump and wireshark will not capture any multicast traffic if they device where they are run is not joined to the multicast groups of interest.
 
-The best solution that I have found for this is to either write custom python tols to join the relevant multicast groups and capture the traffic, or to configure the switch to forward all multicast traffic to the port in question; most switches call this "router mode."
+The best solution that I have found for this is to either write custom python tools to join the relevant multicast groups and capture the traffic, or to configure the switch to forward all multicast traffic to the port in question; most switches call this "router mode."
 isn't sending you any packets!
 
 ## Inbound Multicast on Multi-homed Hosts
 
 When joining a multicast group with setsockopt IP\_ADD\_MEMBERSHIP, Linux allows
 you to specify a local IP address to bind to, or if you specify INADDR\_ANY, it
-will choose an address for you. If you choose INADDR\_ANY, linux chooses "an
+will choose an address for you. If you choose INADDR\_ANY, Linux chooses "an
 appropriate interface"! On a computer with a single network interface this is
 fine, but if you have more than one interface, there's a chance that INADDR\_ANY
 will choose the wrong interface.
@@ -121,6 +121,8 @@ The fix here is a bit painful: you have to write your software to detect all of
 the configured IP addresses and either ask the user to pick one, or join the
 multicast group on all of them. Luckily, you can join multiple multicast groups
 on the same socket, so this isn't too hard to manage.
+
+You can do this in python with the following code (using psutil to detect interfaces):
 
     import socket
     import psutil
@@ -169,8 +171,8 @@ outbound interface for a socket, but this option can only have one option on a
 socket, so if you want to send multicast packets to many interfaces, you have
 to open a separate socket for each interface!
 
-TODO: python example
-    
+You can do this in python with the following code (using psutil to detect interfaces):
+
     import socket
     import psutil
     
