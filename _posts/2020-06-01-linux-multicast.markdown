@@ -87,11 +87,19 @@ deduces that this packet could not have possibly come from that network, and
 drops it. Since the IGMP querier is sending packets from the querier address,
 this will cause Linux to drop the IGMP queries instead of responding to them.
 
-TODO: diagram.
+![Example Multi-homed network](/media/2020/06/01/igmp_querier.svg)
 
-Again, the fixes here are pretty simple: allocate an IP address to your switch,
+Here is an example network that exhibits this issue. The Linux Laptop is attached to two networks, one wifi and the other wired. Its internet connection and default route go through wifi so its default route is 192.168.1.1 (the wifi router).
+
+Since we have not added any additional routes to the Linux Laptop's routing table, it knows that the only traffic that can come from the wired network should be from the 192.168.2.0/24 address range, or multicast traffic.
+
+If the switch's IGMP querier is configured with an IP address such as 1.0.0.0, when the Linux Laptop receives that traffic on its wired network port, it will drop it because it is impossible.
+
+Again, the fix here is pretty simple: allocate an IP address to your switch,
 and set the IGMP to the switch's IP address, or allocate a dedicated IP address
 on the same subnet that is explicitly for use by the IGMP querier.
+
+In the example above, the swich should be allocated an IP address from the 192.168.2.0/24 range; perhaps 192.168.2.3, since this address is not currently used.
 
 ## Sniffing Multicast traffic
 
@@ -114,7 +122,34 @@ the configured IP addresses and either ask the user to pick one, or join the
 multicast group on all of them. Luckily, you can join multiple multicast groups
 on the same socket, so this isn't too hard to manage.
 
-TODO: python example
+    import socket
+    import psutil
+    
+    # Multicast address and group
+    MCAST_GROUP = "239.0.0.1"
+    MCAST_PORT = 2020
+
+    # Create an IPv4 UDP socket.
+    listen = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    # Set REUSEADDR so that we can also bind transmit sockets on the same port.
+    listen.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR)
+
+    # Bind to our multicast port.
+    listen.bind((socket.INADDR_ANY, MCAST_PORT))
+
+    # For each interface.
+    for interface, addrs in psutil.net_if_addrs().items():
+        # For each address on the interface.
+        for addr in addrs:
+            # If the address is an IPv4 address and not localhost.
+            if addr.family == socket.AF_INET and not addr.address.startswith("127."):
+                # Join our multicast group on this address.
+                listen.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,
+                    socket.inet_aton(MCAST_GROUP) + socket.inet_aton(addr.address))
+
+    # Receive data from our socket!
+    data = listen.recvfrom(1500)
 
 Sadly, outbound multicast behaves differently.
 
@@ -135,3 +170,38 @@ socket, so if you want to send multicast packets to many interfaces, you have
 to open a separate socket for each interface!
 
 TODO: python example
+    
+    import socket
+    import psutil
+    
+    # Multicast address and group
+    MCAST_GROUP = "239.0.0.1"
+    MCAST_PORT = 2020
+
+    transmit = []
+
+    # For each interface.
+    for interface, addrs in psutil.net_if_addrs().items():
+        # For each address on the interface.
+        for addr in addrs:
+            # If the address is an IPv4 address and not localhost.
+            if addr.family == socket.AF_INET and not addr.address.startswith("127."):
+                # Create an IPv4 UDP socket.
+                tx = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+                # Set the multicast interface for this socket.
+                tx.setsockopt(socket.SOL_IP, socket.IP_MULTICAST_IF,
+                    socket.inet_aton(addr.address))
+
+                # Set REUSEADDR so that we can bind all of our transmit sockets
+                # on the same port.
+                tx.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR)
+
+                # Add to our list of transmit sockets.
+                transmit.append(tx)
+
+    data = bytes(24)
+    # Use each socket to send data to our multicast group on the interface
+    # associated with that socket.
+    for tx in transmit:
+        tx.sendto(data, (MCAST_GROUP, MCAST_PORT))
